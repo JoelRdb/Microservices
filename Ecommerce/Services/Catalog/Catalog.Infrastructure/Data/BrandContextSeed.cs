@@ -11,7 +11,7 @@ namespace Catalog.Infrastructure.Data
 {
     public static class BrandContextSeed
     {
-        //Ajouter les donées du fichier brands.json dans une collection pour 
+        //Ajouter les donées du fichier brands.json dans une collection pour les données initiales 
         public static void SeedData(IMongoCollection<ProductBrand> brandCollection)
         {
             //Any(): Vérifie s'il y a au moins un élément dans le résultat de Find
