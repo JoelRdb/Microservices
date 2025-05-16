@@ -1,0 +1,162 @@
+﻿[
+  {
+    "Id": "PRD000000000000000000001",
+    "Name": "Running Shoes",
+    "Description": "High-quality running shoes for everyday training.",
+    "Price": 120.99,
+    "ImageFile": "images/products/running_shoes.jpg",
+    "Summary": "Comfortable and durable running shoes.",
+    "Types": {
+      "Id": "PRD-SHOES-000001ABCDEF1",
+      "Name": "Shoes"
+    },
+    "Brands": {
+      "Id": "BRND1234ABCD5678EFG9012",
+      "Name": "Nike"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000002",
+    "Name": "Tennis Racket Pro",
+    "Description": "Lightweight tennis racket with excellent grip.",
+    "Price": 220.50,
+    "ImageFile": "images/products/tennis_racket_pro.jpg",
+    "Summary": "Perfect for intermediate players.",
+    "Types": {
+      "Id": "PRD-RACKT-000002BCDEG2",
+      "Name": "Rackets"
+    },
+    "Brands": {
+      "Id": "BRND2234ABCD5678EFG9013",
+      "Name": "Adidas"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000003",
+    "Name": "Football Ball",
+    "Description": "Official size football ball for matches.",
+    "Price": 89.99,
+    "ImageFile": "images/products/football_ball.jpg",
+    "Summary": "Durable and weather-resistant.",
+    "Types": {
+      "Id": "PRD-FOTBL-000003CDEFG3",
+      "Name": "Footbal"
+    },
+    "Brands": {
+      "Id": "BRND3234ABCD5678EFG9014",
+      "Name": "Puma"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000004",
+    "Name": "Gym Kit Bag",
+    "Description": "Spacious gym kit bag with multiple compartments.",
+    "Price": 75.00,
+    "ImageFile": "images/products/gym_kit_bag.jpg",
+    "Summary": "Ideal for athletes on the go.",
+    "Types": {
+      "Id": "PRD-KITBG-000004DEFGH4",
+      "Name": "Kit Bags"
+    },
+    "Brands": {
+      "Id": "BRND4234ABCD5678EFG9015",
+      "Name": "Reebok"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000005",
+    "Name": "Trail Running Shoes",
+    "Description": "Rugged shoes designed for trail running.",
+    "Price": 140.00,
+    "ImageFile": "images/products/trail_running_shoes.jpg",
+    "Summary": "Grip and comfort on rough terrain.",
+    "Types": {
+      "Id": "PRD-SHOES-000001ABCDEF1",
+      "Name": "Shoes"
+    },
+    "Brands": {
+      "Id": "BRND5234ABCD5678EFG9016",
+      "Name": "Yonex"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000006",
+    "Name": "Badminton Racket",
+    "Description": "Light and balanced racket for fast swings.",
+    "Price": 130.75,
+    "ImageFile": "images/products/badminton_racket.jpg",
+    "Summary": "Perfect for competitive badminton.",
+    "Types": {
+      "Id": "PRD-RACKT-000002BCDEG2",
+      "Name": "Rackets"
+    },
+    "Brands": {
+      "Id": "BRND6234ABCD5678EFG9017",
+      "Name": "Wilson"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000007",
+    "Name": "Soccer Ball",
+    "Description": "FIFA-approved soccer ball for official matches.",
+    "Price": 95.00,
+    "ImageFile": "images/products/soccer_ball.jpg",
+    "Summary": "High durability and excellent air retention.",
+    "Types": {
+      "Id": "PRD-FOTBL-000003CDEFG3",
+      "Name": "Footbal"
+    },
+    "Brands": {
+      "Id": "BRND7234ABCD5678EFG9018",
+      "Name": "Under Armour"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000008",
+    "Name": "Travel Kit Bag",
+    "Description": "Durable and lightweight travel kit bag.",
+    "Price": 80.00,
+    "ImageFile": "images/products/travel_kit_bag.jpg",
+    "Summary": "Perfect for weekend trips and gym visits.",
+    "Types": {
+      "Id": "PRD-KITBG-000004DEFGH4",
+      "Name": "Kit Bags"
+    },
+    "Brands": {
+      "Id": "BRND1234ABCD5678EFG9012",
+      "Name": "Nike"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000009",
+    "Name": "Casual Sneakers",
+    "Description": "Comfortable sneakers for daily wear.",
+    "Price": 110.00,
+    "ImageFile": "images/products/casual_sneakers.jpg",
+    "Summary": "Stylish and versatile.",
+    "Types": {
+      "Id": "PRD-SHOES-000001ABCDEF1",
+      "Name": "Shoes"
+    },
+    "Brands": {
+      "Id": "BRND2234ABCD5678EFG9013",
+      "Name": "Adidas"
+    }
+  },
+  {
+    "Id": "PRD000000000000000000010",
+    "Name": "Pro Kit Bag",
+    "Description": "Professional kit bag for athletes.",
+    "Price": 95.50,
+    "ImageFile": "images/products/pro_kit_bag.jpg",
+    "Summary": "Lots of space with robust design.",
+    "Types": {
+      "Id": "PRD-KITBG-000004DEFGH4",
+      "Name": "Kit Bags"
+    },
+    "Brands": {
+      "Id": "BRND3234ABCD5678EFG9014",
+      "Name": "Puma"
+    }
+  }
+]

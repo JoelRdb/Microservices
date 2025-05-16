@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Id": "BRND1234ABCD5678EFG9012",
+    "Name": "Nike"
+  },
+  {
+    "Id": "BRND2234ABCD5678EFG9013",
+    "Name": "Adidas"
+  },
+  {
+    "Id": "BRND3234ABCD5678EFG9014",
+    "Name": "Puma"
+  },
+  {
+    "Id": "BRND4234ABCD5678EFG9015",
+    "Name": "Reebok"
+  },
+  {
+    "Id": "BRND5234ABCD5678EFG9016",
+    "Name": "Yonex"
+  },
+  {
+    "Id": "BRND6234ABCD5678EFG9017",
+    "Name": "Wilson"
+  },
+  {
+    "Id": "BRND7234ABCD5678EFG9018",
+    "Name": "Under Armour"
+  }
+]

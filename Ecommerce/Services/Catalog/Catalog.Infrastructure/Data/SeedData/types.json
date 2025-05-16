@@ -1,0 +1,18 @@
+﻿[
+  {
+    "Id": "PRD-SHOES-000001ABCDEF1",
+    "Name": "Shoes"
+  },
+  {
+    "Id": "PRD-RACKT-000002BCDEG2",
+    "Name": "Rackets"
+  },
+  {
+    "Id": "PRD-FOTBL-000003CDEFG3",
+    "Name": "Footbal"
+  },
+  {
+    "Id": "PRD-KITBG-000004DEFGH4",
+    "Name": "Kit Bags"
+  }
+]
