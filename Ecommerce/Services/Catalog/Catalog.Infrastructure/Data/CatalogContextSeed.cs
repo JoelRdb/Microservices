@@ -1,18 +1,16 @@
 ﻿using Catalog.Core.Entities;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Data
 {
     public class CatalogContextSeed
     {
+        //Ajouter les donées du fichier products.json dans une collection pour les données initiales 
         public static void SeedData(IMongoCollection<Product> productCollection)
         {
+            //Any(): Vérifie s'il y a au moins un élément dans le résultat de Find
+            //Le prédicat b => true: on ne filtre rien (commme SELECT *)
             bool checkProduct = productCollection.Find(p => true).Any();
             string path = Path.Combine("Data", "SeedData", "products.json");
             if (!checkProduct)
