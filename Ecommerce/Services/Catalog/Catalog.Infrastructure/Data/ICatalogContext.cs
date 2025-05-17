@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Data
 {
-    interface ICatalogContext
+    public interface ICatalogContext
     {
         IMongoCollection<ProductType> Types { get; }
         IMongoCollection<ProductBrand> Brands { get; }
