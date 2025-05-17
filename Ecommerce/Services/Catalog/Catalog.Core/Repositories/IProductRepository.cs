@@ -12,7 +12,7 @@ namespace Catalog.Core.Repositories
         Task<IEnumerable<Product>> GetProducts();
         Task<Product> GetProduct(string id);
         Task<IEnumerable<Product>> GetProductSByName(string name);
-        Task<IEnumerable<Product>> GetProductSByBrand(string name);
+        Task<IEnumerable<Product>> GetProductSByBrand(string brandName);
         Task<Product> CreatProduct(Product product);
         Task<bool> UpdateProduct(Product product);
         Task<bool> DelteProduct(string id);

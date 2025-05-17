@@ -27,39 +27,60 @@ namespace Catalog.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetProductSByBrand(string name)
+        public async Task<IEnumerable<Product>> GetProductSByBrand(string brandName)
         {
-            throw new NotImplementedException();
+            return await _context
+                .Products
+                .Find(b => b.Brands.Name.ToLower() == brandName.ToLower())
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<Product>> GetProductSByName(string name)
+        public async Task<IEnumerable<Product>> GetProductSByName(string name)
         {
-            throw new NotImplementedException();
+            return await _context
+                .Products
+                .Find(p => p.Name.ToLower() == name.ToLower())
+                .ToListAsync();
         }
 
         public async Task<Product> CreatProduct(Product product)
         {
-            throw new NotImplementedException();
+            await _context
+                .Products
+                .InsertOneAsync(product);
+            return product;
         }
 
-        public Task<bool> DelteProduct(string id)
+        public async Task<bool> DelteProduct(string id)
         {
-            throw new NotImplementedException();
+            var deletedProduct = await _context
+                .Products
+                .DeleteOneAsync(p => p.Id == id);
+            return deletedProduct.IsAcknowledged && deletedProduct.DeletedCount > 0; //True : Mongo reconnu la requete et au moins un un élément a été supprimé
         }
 
-        public Task<bool> UpdateProduct(Product product)
+        public async Task<bool> UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            var updateProduct = await _context
+                .Products
+                .ReplaceOneAsync(p => p.Id == product.Id, product);
+            return updateProduct.IsAcknowledged && updateProduct.ModifiedCount > 0; //True : Mongo reconnu la requete et au moins un un élément a été modifié
         }
 
-        public Task<IEnumerable<ProductBrand>> GetAllBrands()
+        public async Task<IEnumerable<ProductBrand>> GetAllBrands()
         {
-            throw new NotImplementedException();
+            return await _context
+                .Brands
+                .Find(b => true)
+                .ToListAsync();
         }
 
-        public Task<IEnumerable<ProductType>> GetAllTypes()
+        public async Task<IEnumerable<ProductType>> GetAllTypes()
         {
-            throw new NotImplementedException();
+            return await _context
+                .Types
+                .Find(t => true)
+                .ToListAsync();
         }
 
 
