@@ -27,7 +27,7 @@ namespace Catalog.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductSByBrand(string brandName)
+        public async Task<IEnumerable<Product>> GetProductsByBrand(string brandName)
         {
             return await _context
                 .Products
@@ -35,7 +35,7 @@ namespace Catalog.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductSByName(string name)
+        public async Task<IEnumerable<Product>> GetProductsByName(string name)
         {
             return await _context
                 .Products
@@ -51,7 +51,7 @@ namespace Catalog.Infrastructure.Repositories
             return product;
         }
 
-        public async Task<bool> DelteProduct(string id)
+        public async Task<bool> DeleteProduct(string id)
         {
             var deletedProduct = await _context
                 .Products
@@ -61,10 +61,10 @@ namespace Catalog.Infrastructure.Repositories
 
         public async Task<bool> UpdateProduct(Product product)
         {
-            var updateProduct = await _context
+            var updatedProduct = await _context
                 .Products
                 .ReplaceOneAsync(p => p.Id == product.Id, product);
-            return updateProduct.IsAcknowledged && updateProduct.ModifiedCount > 0; //True : Mongo reconnu la requete et au moins un un élément a été modifié
+            return updatedProduct.IsAcknowledged && updatedProduct.ModifiedCount > 0; //True : Mongo reconnu la requete et au moins un un élément a été modifié
         }
 
         public async Task<IEnumerable<ProductBrand>> GetAllBrands()
