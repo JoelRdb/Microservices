@@ -9,6 +9,8 @@ namespace Catalog.Application.Mappers
         public ProductMappingProfile()
         {
             CreateMap<ProductBrand, BrandResponse>().ReverseMap(); //CreateMap<Source, Destination>  ; ReverseMap : rend le mappage bidirectionnel
+            CreateMap<Product, ProductResponse>().ReverseMap();
+            CreateMap<ProductType, TypesResponse>().ReverseMap();
         }
     }
 }
