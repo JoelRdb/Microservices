@@ -17,10 +17,10 @@ namespace Catalog.Infrastructure.Data
             //Any(): Vérifie s'il y a au moins un élément dans le résultat de Find
             //Le prédicat b => true: on ne filtre rien (commme SELECT *)
             bool checkBrands = brandCollection.Find(b => true).Any();
-            string path = Path.Combine("Data", "SeedData", "brands.json");
+            //string path = Path.Combine("Data", "SeedData", "brands.json");
             if (!checkBrands)
             {
-                var brandsData = File.ReadAllText(path);
+                var brandsData = File.ReadAllText("../Catalog.Infrastructure/Data/SeedData/brands.json");
                 var brands = JsonSerializer.Deserialize<List<ProductBrand>>(brandsData);
                 if (brands != null)
                 {

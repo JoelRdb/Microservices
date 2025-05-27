@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Catalog.Application.Handlers;
 using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
@@ -28,7 +29,11 @@ builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Microsoft.OpenApi.M
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 // Enregistrer  MediatR
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+var assemblies = new Assembly[]{
+    Assembly.GetExecutingAssembly(),            // Catalog.API
+    typeof(GetAllBrandsHandler).Assembly        // Catalog.Application
+};                                              //Scanne tous ces projets pour trouver les handlers.
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
 // Enregistrer les services applicatif
 builder.Services.AddScoped<IProductRepository, ProductRepositoy>();
@@ -44,6 +49,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseAuthorization();
