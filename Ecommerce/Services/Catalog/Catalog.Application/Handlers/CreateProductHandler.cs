@@ -14,7 +14,7 @@ namespace Catalog.Application.Handlers
 {
     public class CreateProductHandler(IProductRepository repositoryProduct) : IRequestHandler<CreateProductCommand, ProductResponse>
     {
-        private readonly IProductRepository _repositoryProduct;
+        private readonly IProductRepository _repositoryProduct = repositoryProduct;
         public async Task<ProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             var productEntity = ProductMapper.Mapper.Map<Product>(request);

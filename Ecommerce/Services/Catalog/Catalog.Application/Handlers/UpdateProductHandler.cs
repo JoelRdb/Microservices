@@ -22,7 +22,7 @@ namespace Catalog.Application.Handlers
                 ImageFile = request.ImageFile,
                 Price = request.Price
             });
-            return true;
+            return productEntity;
         }
     }
 }
