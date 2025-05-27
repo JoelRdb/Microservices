@@ -5,6 +5,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
+
 namespace Catalog.API.Controllers
 {
     public class CatalogController : APIController
@@ -81,8 +82,8 @@ namespace Catalog.API.Controllers
 
         [HttpPost]
         [Route("CreateProduct")]
-        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<bool>> CreateProduct([FromBody] CreateProductCommand productCommand)
+        [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ProductResponse>> CreateProduct([FromBody] CreateProductCommand productCommand)
         {
             var result = await _mediator.Send<ProductResponse>(productCommand);
             return Ok(result);
@@ -91,7 +92,7 @@ namespace Catalog.API.Controllers
         [HttpPut]
         [Route("UpdateProduct")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ProductResponse>> CreateProduct([FromBody] UpdateProductCommand productCommand)
+        public async Task<ActionResult<ProductResponse>> UpdateProduct([FromBody] UpdateProductCommand productCommand)
         {
             var result = await _mediator.Send(productCommand);
             return Ok(result);
