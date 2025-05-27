@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Infrastructure.Data
 {
-    class CatalogContext : ICatalogContext
+    public class CatalogContext : ICatalogContext
     {
         public IMongoCollection<ProductType> Types { get; }
 

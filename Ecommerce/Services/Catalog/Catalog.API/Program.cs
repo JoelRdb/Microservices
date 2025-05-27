@@ -24,7 +24,7 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 builder.Services.AddScoped<IProductRepository, ProductRepositoy>();
 builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
-builder.Services.AddScoped<ICatalogContext, ICatalogContext>();
+builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 
 var app = builder.Build();
 
