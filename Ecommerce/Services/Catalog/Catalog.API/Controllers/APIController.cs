@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.API.Controllers
 {
-    [ApiVersion("V1")]
+    [ApiVersion("1.0")]
     [Route("api/v{version:ApiVersion}/[controller]")]
     [ApiController]
     public class APIController : ControllerBase
