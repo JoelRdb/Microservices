@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Catalog.Core.Specs
 {
-    class CatalogSpecsParams
+    public class CatalogSpecsParams
     {
         public const int MaxPageSize = 70;
         private int _pageSize = 10;
