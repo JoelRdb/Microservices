@@ -37,11 +37,7 @@ namespace Catalog.Infrastructure.Repositories
             }
 
             var totalItems = await _context.Products.CountDocumentsAsync(filter);
-            var data = await _context.Products
-                .Find(filter)
-                .Skip((catalogSpecsParams.PageIndex - 1) * catalogSpecsParams.PageSize)
-                .Limit(catalogSpecsParams.PageSize)
-                .ToListAsync();
+            var data = await DataFilter(catalogSpecsParams, filter);
 
             return new Pagination<Product>(catalogSpecsParams.PageIndex,catalogSpecsParams.PageSize,(int)totalItems,data);
 
@@ -50,6 +46,8 @@ namespace Catalog.Infrastructure.Repositories
             //    .Find(p => true)  //Aucun filtre
             //    .ToListAsync();
         }
+
+       
 
         public async Task<IEnumerable<Product>> GetProductsByBrand(string brandName)
         {
@@ -107,6 +105,32 @@ namespace Catalog.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+
+        private async Task<IReadOnlyList<Product>> DataFilter(CatalogSpecsParams catalogSpecsParams, FilterDefinition<Product> filter)
+        {
+            var sortDefn = Builders<Product>.Sort.Ascending("Name"); //Default
+            if (!string.IsNullOrEmpty(catalogSpecsParams.Sort))
+            {
+                switch (catalogSpecsParams.Sort)
+                {
+                    case "priceAsc":
+                        sortDefn = Builders<Product>.Sort.Ascending(p => p.Price);
+                        break;
+                    case "priceDesc":
+                        sortDefn = Builders<Product>.Sort.Descending(p => p.Price);
+                        break;
+                    default:
+                        sortDefn = Builders<Product>.Sort.Ascending(p => p.Name);
+                        break;
+                }
+            }
+            return await _context.Products
+                .Find(filter)
+                .Sort(sortDefn)
+                .Skip(catalogSpecsParams.PageSize * (catalogSpecsParams.PageIndex) - 1)
+                .Limit(catalogSpecsParams.PageSize)
+                .ToListAsync();
+        }
 
     }
 }
