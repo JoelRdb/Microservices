@@ -46,11 +46,23 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.MapOpenApi();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
 }
+
+// Active Swagger tout le temps
+app.MapOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// Rediriger automatiquement "/" vers Swagger
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+});
 
 app.UseAuthorization();
 
