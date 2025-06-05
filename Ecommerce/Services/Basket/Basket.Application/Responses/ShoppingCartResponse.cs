@@ -6,14 +6,15 @@
         public List<ShoppingCartItemResponse> Items { get; set; }
         public ShoppingCartResponse()
         {
-            
+
         }
         public ShoppingCartResponse(string userName)
         {
             UserName = userName;
         }
 
-        public decimal TotalPrice {
+        public decimal TotalPrice
+        {
             get
             {
                 decimal totalPrice = 0;
@@ -24,4 +25,5 @@
                 return totalPrice;
             }
         }
+    }
 }
