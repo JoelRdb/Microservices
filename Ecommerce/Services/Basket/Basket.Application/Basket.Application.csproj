@@ -12,8 +12,6 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Hadlers\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
