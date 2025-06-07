@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.66" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Discount.Application\Discount.Application.csproj" />
   </ItemGroup>
 
