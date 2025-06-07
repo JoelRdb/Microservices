@@ -50,10 +50,21 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 }
 
+// Active Swagger tout le temps
+app.UseSwagger();
+app.UseSwaggerUI();
+
+// Rediriger automatiquement "/" vers Swagger
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
+
+});
 app.UseAuthorization();
 
 app.MapControllers();
