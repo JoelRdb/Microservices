@@ -26,7 +26,7 @@ builder.Services.AddGrpc();
 var app = builder.Build();
 
 //Migrate Database
-app.MigrateDatabse<Program>();
+app.MigrateDatabase<Program>();
 
 
 // Configure the HTTP request pipeline.
@@ -35,7 +35,6 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
-app.UseAuthorization();
 
 app.UseRouting();
 
