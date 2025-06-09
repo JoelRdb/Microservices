@@ -16,4 +16,11 @@
     <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+	  <Protobuf Include="..\..\Discount\Discount.Application\Protos\discount.proto" GrpServices="Client">
+		  <Link>Protos\discount.proto</Link>
+	  </Protobuf>	
+  </ItemGroup>	
+	
 </Project>
