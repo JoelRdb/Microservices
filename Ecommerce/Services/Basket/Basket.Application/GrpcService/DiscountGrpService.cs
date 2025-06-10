@@ -14,6 +14,7 @@ namespace Basket.Application.GrpcService
         public async Task<CouponModel> GetDiscount(string productName)
         {
             var discountRequest = new GetDiscountRequest { ProductName = productName };
+            Console.WriteLine("VALEUR DE LAVARIABLE discountRequest: " + discountRequest.ProductName);
             return await _discountProtoServiceClient.GetDiscountAsync(discountRequest);
         }
     }

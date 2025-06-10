@@ -1,6 +1,8 @@
 services:
   catalogdb:
     container_name: catalogdb
+    environment:
+      - TZ=Indian/Antananarivo
     restart: always
     ports:
       - "27017:27017"
@@ -8,6 +10,8 @@ services:
       - mongo_data:/data/db
   basketdb:
     container_name: basketdb
+    environment:
+      - TZ=Indian/Antananarivo
     restart: always
     ports:
       - "6379:6379"
@@ -18,6 +22,7 @@ services:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=Password@1
       - POSTGRES_DB=DiscountDb
+      - TZ=Indian/Antananarivo
     restart: always
     ports:
       - "5432:5432"
@@ -48,7 +53,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings__ConnectionString=basketdb:6379"
-      - "GrpcSettings__DiscountUrl=http://discount.api"
+      - "GrpcSettings__DiscountUrl=http://discount.api:8080"
     depends_on:
       - basketdb
     ports:
