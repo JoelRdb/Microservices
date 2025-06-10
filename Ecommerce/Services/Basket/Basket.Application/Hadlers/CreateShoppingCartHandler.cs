@@ -4,15 +4,23 @@ using Basket.Application.Responses;
 using Basket.Core.Repositories;
 using MediatR;
 using Basket.Core.Entities;
+using Basket.Application.GrpcService;
 
 namespace Basket.Application.Hadlers
 {
-    public class CreateShoppingCartHandler(IBasketRepository basketRepository) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
+    public class CreateShoppingCartHandler(IBasketRepository basketRepository, DiscountGrpService discountGrpService) : IRequestHandler<CreateShoppingCartCommand, ShoppingCartResponse>
     {
         private readonly IBasketRepository _basketRepository = basketRepository;
+        private readonly DiscountGrpService _discountGrpService = discountGrpService;
+
         public async Task<ShoppingCartResponse> Handle(CreateShoppingCartCommand request, CancellationToken cancellationToken)
         {
-            //TODO: Will be integrating Discount service
+            foreach (var item in request.Items)
+            {
+                var coupon = await _discountGrpService.GetDiscount(item.ProductName);
+                item.Price -= coupon.Amount;
+            }
+
             var shoppingCart = await _basketRepository.UpdateBasket(new ShoppingCart
             {
                 UserName = request.UserName,
