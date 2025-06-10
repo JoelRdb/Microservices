@@ -11,10 +11,10 @@ namespace Basket.Application.GrpcService
             _discountProtoServiceClient = discountProtoServiceClient;
         }
 
-        public async Task<CouponModel> GeDiscount(string productName)
+        public async Task<CouponModel> GetDiscount(string productName)
         {
-            var discoutRequest = new GetDiscountRequest { ProductName = productName };
-            return await _discountProtoServiceClient.GetDiscountAsync(discoutRequest);
+            var discountRequest = new GetDiscountRequest { ProductName = productName };
+            return await _discountProtoServiceClient.GetDiscountAsync(discountRequest);
         }
     }
 }
