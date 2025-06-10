@@ -24,4 +24,4 @@ namespace Ordering.Core.Entities
         public int? PaymentMethod { get; set; }
     }
 }
-}
+
