@@ -4,11 +4,11 @@ using Ordering.Application.Handlers;
 
 namespace Ordering.Application.Behaviour
 {
-    public class UnhandlerdExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+    public class UnhandledExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
     {
         private readonly ILogger<TRequest> _logger;
 
-        public UnhandlerdExceptionBehaviour(ILogger<TRequest> logger)
+        public UnhandledExceptionBehaviour(ILogger<TRequest> logger)
         {
             _logger = logger;
         }
