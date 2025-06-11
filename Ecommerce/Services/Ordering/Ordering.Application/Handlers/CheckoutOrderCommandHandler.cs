@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Ordering.Application.Commands;
-using Ordering.Application.Responses;
 using Ordering.Core.Entities;
 using Ordering.Core.Repositories;
 
@@ -11,10 +10,10 @@ namespace Ordering.Application.Handlers
     public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, int>
     {
         private readonly IMapper _mapper;
-        private readonly ILogger _logger;
+        private readonly ILogger<CheckoutOrderCommand> _logger;
         private readonly IOrderRepository _orderRepository;
 
-        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger logger)
+        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<CheckoutOrderCommand> logger)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;

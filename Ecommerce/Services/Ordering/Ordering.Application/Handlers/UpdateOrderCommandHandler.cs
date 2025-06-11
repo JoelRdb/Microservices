@@ -11,10 +11,10 @@ namespace Ordering.Application.Handlers
     public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, Unit>
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly ILogger _logger;
+        private readonly ILogger<UpdateOrderCommandHandler> _logger;
         private readonly IMapper _mapper;
 
-        public UpdateOrderCommandHandler(IOrderRepository orderRepository, ILogger logger, IMapper mapper)
+        public UpdateOrderCommandHandler(IOrderRepository orderRepository, ILogger<UpdateOrderCommandHandler> logger, IMapper mapper)
         {
             _orderRepository = orderRepository;
             _logger = logger;
