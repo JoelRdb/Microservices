@@ -34,6 +34,15 @@ services:
       timeout: 5s
       retries: 5
 
+  orderdb:
+    container_name: orderdb
+    environment:
+      SA_PASSWORD: "Joel1234567"
+      ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "1433:1433"
+
   catalog.api:
     container_name: catalog.api
     environment:
@@ -69,6 +78,17 @@ services:
          condition: service_healthy
     ports:
       - "8002:8080"   
+
+  ordering.api:
+    container_name: ordering.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Joel1234567;"
+    depends_on:
+      - orderdb  
+    ports:
+      - "8003:8080"
+
 
   pgadmin:
     container_name: pgadmin
