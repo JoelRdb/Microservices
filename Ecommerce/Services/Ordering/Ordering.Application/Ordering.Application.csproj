@@ -15,8 +15,13 @@
     <Folder Include="Commands\" />
     <Folder Include="Mappers\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Responses\" />
     <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
   </ItemGroup>
 
 </Project>
