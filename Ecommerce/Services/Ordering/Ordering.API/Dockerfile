@@ -2,7 +2,7 @@
 
 # Cet index est utilisé lors de l’exécution à partir de VS en mode rapide (par défaut pour la configuration de débogage)
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
+USER app
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 443
