@@ -117,6 +117,8 @@ services:
       - orderdb  
     ports:
       - "8003:8080"
+    command:
+      /bin/sh -c "dotnet ef database update -p ../Ordering.Infrastructure -s ../Ordering.API && dotnet Ordering.API.dll"
 
 
 
