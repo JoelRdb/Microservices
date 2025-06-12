@@ -10,10 +10,10 @@ namespace Ordering.Application.Handlers
     public class CheckoutOrderCommandHandler : IRequestHandler<CheckoutOrderCommand, int>
     {
         private readonly IMapper _mapper;
-        private readonly ILogger<CheckoutOrderCommand> _logger;
+        private readonly ILogger<CheckoutOrderCommandHandler> _logger;
         private readonly IOrderRepository _orderRepository;
 
-        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<CheckoutOrderCommand> logger)
+        public CheckoutOrderCommandHandler(IOrderRepository orderRepository, IMapper mapper, ILogger<CheckoutOrderCommandHandler> logger)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;

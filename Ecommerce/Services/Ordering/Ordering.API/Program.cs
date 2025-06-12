@@ -7,7 +7,7 @@ using Ordering.Infrastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddControllers();
 builder.Services.AddApiVersioning(options =>
 {
     options.ReportApiVersions = true;
@@ -41,7 +41,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Rediriger automatiquement "/" vers Swagger
+app.MapGet("/", context =>
+{
+    context.Response.Redirect("/swagger");
+    return Task.CompletedTask;
 
+});
+app.UseAuthorization();
 
 app.MapControllers();
 
