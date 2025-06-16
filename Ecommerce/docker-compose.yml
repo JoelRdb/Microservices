@@ -12,7 +12,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
   rabbitmq:
-    image: rabbitmq:3-management-apline
+    image: rabbitmq:3-management-alpine
 
   pgadmin:
     image: dpage/pgadmin4
