@@ -11,6 +11,9 @@ services:
   orderdb:
     image: mcr.microsoft.com/mssql/server:2022-latest
 
+  rabbitmq:
+    image: rabbitmq:3-management-apline
+
   pgadmin:
     image: dpage/pgadmin4
 
