@@ -131,6 +131,24 @@ services:
       /bin/sh -c "dotnet ef database update -p ../Ordering.Infrastructure -s ../Ordering.API && dotnet Ordering.API.dll"
 
 
+  elasticsearch:
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node 
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+
+  kibana:
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
 
 
 
