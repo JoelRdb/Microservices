@@ -10,7 +10,7 @@ namespace Common.Logging
         /* HostBuilderContext → fournit l’environnement (Development, Production, etc.)
            LoggerConfiguration → l’objet à configurer
         */
-        public static Action<HostBuilderContext, LoggerConfiguration> cfg =>
+        public static Action<HostBuilderContext, LoggerConfiguration> ConfigureLogger =>
             (context, loggerConfiguration) =>
             {
                 var env = context.HostingEnvironment;

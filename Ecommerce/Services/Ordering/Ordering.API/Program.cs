@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Common.Logging;
 using EventBus.Messages.E_vents.Common;
 using MassTransit;
 using Ordering.API.EventBusConsumer;
@@ -6,10 +7,16 @@ using Ordering.API.Extensions;
 using Ordering.Application.Extensions;
 using Ordering.Infrastructure.Data;
 using Ordering.Infrastructure.Extensions;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Serilog configuration
+builder.Host.UseSerilog(Logging.ConfigureLogger);
+
+
 builder.Services.AddControllers();
 builder.Services.AddApiVersioning(options =>
 {
