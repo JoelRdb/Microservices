@@ -127,8 +127,9 @@ services:
       - rabbitmq 
     ports:
       - "8003:8080"
-    command:
-      /bin/sh -c "dotnet ef database update -p ../Ordering.Infrastructure -s ../Ordering.API && dotnet Ordering.API.dll"
+    command: >
+      # /bin/sh -c "dotnet ef database update -p ../Ordering.Infrastructure -s ../Ordering.API && dotnet Ordering.API.dll"
+      sh -c "sleep 30 && dotnet ef database update -c OrderContext && dotnet Ordering.API.dll"
 
 
   elasticsearch:
