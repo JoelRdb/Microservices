@@ -54,7 +54,7 @@ namespace Discount.Infrastructure.Extensions
                     cmd.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount)VALUES('Adidas Quick Force Indoor Badminton Shoes', 'Shoes Discount', 500)";
                     cmd.ExecuteNonQuery();
 
-                    cmd.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount)VALUES('Yonex VCORE Pro 100 A Tennis Racquet (270gm, Strung)', 'Racquet Discount', 700)";
+                    cmd.CommandText = "INSERT INTO Coupon(ProductName, Description, Amount)VALUES('Yonex VCORE Pro 100 A Tennis Racquet (290gm, Strung)', 'Racquet Discount', 700)";
                     cmd.ExecuteNonQuery();
                     //Exit loop if successful
                     break;

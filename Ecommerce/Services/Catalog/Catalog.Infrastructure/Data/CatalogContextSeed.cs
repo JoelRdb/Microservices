@@ -12,6 +12,7 @@ namespace Catalog.Infrastructure.Data
             //Any(): Vérifie s'il y a au moins un élément dans le résultat de Find
             //Le prédicat b => true: on ne filtre rien (commme SELECT *)
             bool checkProduct = productCollection.Find(p => true).Any();
+
             //string path = Path.Combine("Data", "SeedData", "products.json");
             if (!checkProduct)
             {
@@ -24,6 +25,14 @@ namespace Catalog.Infrastructure.Data
                         productCollection.InsertOneAsync(item);
                     }
                 }
+            }
+            else
+            {
+                var allProducts = productCollection.Find(p => true).ToList();
+                foreach (var item in allProducts)
+                {
+                    Console.WriteLine($"{item.Name} - {item.Price}");
+                }              
             }
         }
     }
