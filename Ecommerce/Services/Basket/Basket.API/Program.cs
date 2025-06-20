@@ -16,6 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Serilog configuration
 builder.Host.UseSerilog(Logging.ConfigureLogger);
+Log.Information("Test log depuis Catalog.API dans Docker");
 
 builder.Services.AddControllers();
 
