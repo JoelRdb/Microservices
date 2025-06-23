@@ -28,6 +28,9 @@ namespace Basket.API.Controllers
             _logger = logger;
         }
 
+        /// <summary>Je suis une méthode testée pour Swagger doc</summary>
+        /// <param name="userName">Nom de l'utilisateur</param>
+        /// <returns>Le panier</returns>
         [HttpGet]
         [Route("[action]/{userName}", Name="GetBasketByUserName")]
         [ProducesResponseType(typeof(ShoppingCartResponse), (int) HttpStatusCode.OK)]

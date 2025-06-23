@@ -44,6 +44,13 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v1" });
     c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v2" });
 
+    //Include XML comments 
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
     //Configure Swagger to use versioning
     c.DocInclusionPredicate((version, ApiDescription) =>
     {
@@ -58,9 +65,6 @@ builder.Services.AddSwaggerGen(c =>
         return versions?.Any(v => $"v{v.ToString()}" == version) ?? false;
     });
 });
-
-
-
 
 
 // Register AutoMapper
@@ -110,21 +114,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-// Active Swagger tout le temps
-//app.UseSwagger();
-//app.UseSwaggerUI(c =>
-//{
-//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1");
-//    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Basket.API v2");
-//});
 
-// Rediriger automatiquement "/" vers Swagger
-//app.MapGet("/", context =>
-//{
-//    context.Response.Redirect("/swagger/");
-//    return Task.CompletedTask;
-
-//});
 app.UseAuthorization();
 
 app.MapControllers();
