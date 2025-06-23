@@ -12,6 +12,7 @@ using System.Net;
 
 namespace Basket.API.Controllers
 {
+    [Asp.Versioning.ApiVersion("1")]
     public class BasketController : APIController
     {
 

@@ -1,4 +1,3 @@
-using Asp.Versioning;
 using Basket.Application.GrpcService;
 using Basket.Application.Hadlers;
 using Basket.Core.Repositories;
@@ -6,9 +5,12 @@ using Basket.Infrastructure.Repositories;
 using Common.Logging;
 using Discount.Grpc.Proto;
 using MassTransit;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-
+using Asp.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +26,7 @@ builder.Services.AddApiVersioning(options =>
 {
     options.ReportApiVersions = true;
     options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.DefaultApiVersion = new Asp.Versioning.ApiVersion(1, 0);
 })
 // Add Versioned API Explorer to support versioning
 .AddApiExplorer(options =>
@@ -37,8 +39,29 @@ builder.Services.AddApiVersioning(options =>
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 //builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v1" }); });
-builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v2" }); });
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v1" });
+    c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v2" });
+
+    //Configure Swagger to use versioning
+    c.DocInclusionPredicate((version, ApiDescription) =>
+    {
+        if (!ApiDescription.TryGetMethodInfo(out var methodInfo))
+        {
+            return false;
+        }
+        var versions = methodInfo.DeclaringType?
+                        .GetCustomAttributes(true)
+                        .OfType<Asp.Versioning.ApiVersionAttribute>()
+                        .SelectMany(attr => attr.Versions);
+        return versions?.Any(v => $"v{v.ToString()}" == version) ?? false;
+    });
+});
+
+
+
+
 
 // Register AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
@@ -79,21 +102,29 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1");
+        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Basket.API v2");
+    });
 }
 
 // Active Swagger tout le temps
-app.UseSwagger();
-app.UseSwaggerUI();
+//app.UseSwagger();
+//app.UseSwaggerUI(c =>
+//{
+//    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1");
+//    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Basket.API v2");
+//});
 
 // Rediriger automatiquement "/" vers Swagger
-app.MapGet("/", context =>
-{
-    context.Response.Redirect("/swagger");
-    return Task.CompletedTask;
+//app.MapGet("/", context =>
+//{
+//    context.Response.Redirect("/swagger/");
+//    return Task.CompletedTask;
 
-});
+//});
 app.UseAuthorization();
 
 app.MapControllers();
