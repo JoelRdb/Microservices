@@ -72,7 +72,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductByBrandName/{brand}",
-      "UpstreamHttpMethod": [ "" ]
+      "UpstreamHttpMethod": [ "http" ]
     },
     //  Basket API
     {
