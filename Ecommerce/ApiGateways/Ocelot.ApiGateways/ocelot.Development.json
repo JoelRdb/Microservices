@@ -72,7 +72,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductByBrandName/{brand}",
-      "UpstreamHttpMethod": [ "http" ]
+      "UpstreamHttpMethod": [ "GET" ]
     },
     //  Basket API
     {
@@ -183,7 +183,7 @@
     },
     // Order API
     {
-      "DownstreamPathTemplate": "/api/v{version}/Order/{userName}",
+      "DownstreamPathTemplate": "/api/v1/Order/{userName}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
