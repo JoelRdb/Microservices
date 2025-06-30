@@ -61,8 +61,10 @@ namespace Basket.API.Controllers
         }
 
 
-        //After developing EventBusMessages in Infrastructure
-
+        // After developing EventBusMessages in Infrastructure : 
+        // Update appsettings.json for EventBusSettings,
+        // Update dockerfile (COPY ["Infrastructure/EventBus.Messages/EventBus.Messages.csproj", "Infrastucture/EventBus.Messages/"]), 
+        // Update Program.cs for MassTransit(RabbitMQ).
         [Route("[action]")]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.Accepted)]
