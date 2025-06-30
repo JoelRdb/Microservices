@@ -10,13 +10,13 @@ COPY ["ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj", "ApiGateways/O
 
 RUN dotnet restore "ApiGateways/Ocelot.ApiGateways/Ocelot.ApiGateways.csproj"
 COPY . .
-WORKDIR "/src/ApiGateways/Ocelot.API"
+WORKDIR "/src/ApiGateways/Ocelot.ApiGateways"
 RUN dotnet build "Ocelot.ApiGateways.csproj" -c Release -o /app/build
 
-FROM buils AS publish
-RUN dotnet publish "Ocelot.ApiGateway.csproj" -c Release -o /app/publish
+FROM build AS publish
+RUN dotnet publish "Ocelot.ApiGateways.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Ocelot.ApiGateway.dll"]
+ENTRYPOINT ["dotnet", "Ocelot.ApiGateways.dll"]
