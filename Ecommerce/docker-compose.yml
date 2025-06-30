@@ -50,6 +50,12 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana:8.14.3
 
+  ocelotapigw:
+    image: ${DOCKER_REGISTRY-}ocelotapigw
+    build:
+        context: .
+        dockerfile: ApiGateways/Ocelot.ApiGateways/Dockerfile
+
 volumes:
   mongo_data: 
   portainer_data:
