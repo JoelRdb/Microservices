@@ -48,7 +48,7 @@ builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 
-
+// Implementing Authorize Filter for use Identity Server
 var userPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();

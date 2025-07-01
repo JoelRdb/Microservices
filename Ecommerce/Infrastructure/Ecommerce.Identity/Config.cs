@@ -19,18 +19,23 @@ public static class Config
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
-        // Associe les droits que le client peur demander
+        // Associe les droits que le client peut demander
         new ApiScope[]
         {
             new ApiScope("catalogapi"),
+            new ApiScope("basketapi"),
         };
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
             // List of Microservices can go here : Définit l'API protégée
-            new ApiResource("Catalog", "Catalog.API")
+            new ApiResource("Catalog", "Catalog.API") //Name: Catalog (audience in Program.cs for Catalog) and Catalog.API : DisplayName
             {
                 Scopes = {"catalogapi"}
+            },
+            new ApiResource("Basket", "Basket.API")
+            {
+                Scopes = {"basketapi"}
             }
         };
     public static IEnumerable<Client> Clients =>
@@ -52,7 +57,7 @@ public static class Config
             ClientId = "CatalogApiClient",
             ClientSecrets = {new Secret("5c6eb3b4-4668-ac57-2b4591ec26d2".Sha256())},
             AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
-            AllowedScopes = {"catalogapi"}
+            AllowedScopes = {"catalogapi", "basketapi"}
         }
         };
 }

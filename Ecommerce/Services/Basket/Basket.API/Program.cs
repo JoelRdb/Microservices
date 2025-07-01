@@ -11,6 +11,9 @@ using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,7 +22,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Serilog configuration
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
-builder.Services.AddControllers();
 
 // Add API Versioning
 builder.Services.AddApiVersioning(options =>
@@ -90,6 +92,24 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddScoped<DiscountGrpService>();
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
     cfg => cfg.Address = new Uri(builder.Configuration["GrpcSettings:DiscountUrl"]));
+
+// Implementing Authorize Filter for use Identity Server
+var userPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+builder.Services.AddControllers(config =>
+{
+    config.Filters.Add(new AuthorizeFilter(userPolicy));
+});
+
+// Identity Server : after install project of Ecommerce.Identity with Duende
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://localhost:9009";
+        options.Audience = "Basket";
+    });
+
 
 builder.Services.AddMassTransit(config =>
 {
