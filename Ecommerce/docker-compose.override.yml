@@ -164,6 +164,18 @@ services:
     ports:
       - "8010:8080"
 
+  # identityserver:
+  #   container_name: identityserver
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #   depends_on:
+  #     - catalog.api
+  #     - basket.api
+  #     - discount.api
+  #     - ordering.api
+  #   ports:
+  #     - "9009:8080"
+
 
 
 

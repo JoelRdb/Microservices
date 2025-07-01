@@ -24,6 +24,8 @@ public static class Config
         {
             new ApiScope("catalogapi"),
             new ApiScope("basketapi"),
+            new ApiScope("catalogapi.read"),
+            new ApiScope("catalogapi.write"),
         };
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
@@ -31,7 +33,7 @@ public static class Config
             // List of Microservices can go here : Définit l'API protégée
             new ApiResource("Catalog", "Catalog.API") //Name: Catalog (audience in Program.cs for Catalog) and Catalog.API : DisplayName
             {
-                Scopes = {"catalogapi"}
+                Scopes = { "catalogapi.read", "catalogapi.write" }
             },
             new ApiResource("Basket", "Basket.API")
             {
@@ -57,7 +59,7 @@ public static class Config
                 ClientId = "CatalogApiClient",
                 ClientSecrets = {new Secret("5c6eb3b4-4668-ac57-2b4591ec26d2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
-                AllowedScopes = {"catalogapi"}
+                AllowedScopes = {"catalogapi.read", "catalogapi.write"}
             },
             new Client
             {
