@@ -1,4 +1,11 @@
 ﻿using Duende.IdentityServer.Models;
+using static System.Net.Mime.MediaTypeNames;
+using System.Reflection.PortableExecutable;
+using System.Text;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.IdentityModel.Tokens;
+using Serilog.Filters;
+using static Duende.IdentityServer.Events.TokenIssuedSuccessEvent;
 
 namespace Ecommerce.Identity;
 
@@ -12,46 +19,40 @@ public static class Config
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
+        // Associe les droits que le client peur demander
         new ApiScope[]
         {
-            new ApiScope("scope1"),
-            new ApiScope("scope2"),
+            new ApiScope("catalogapi"),
         };
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-            // List of Microservices can go here
+            // List of Microservices can go here : Définit l'API protégée
+            new ApiResource("Catalog", "Catalog.API")
+            {
+                Scopes = {"catalogapi"}
+            }
         };
-
     public static IEnumerable<Client> Clients =>
-        new Client[]
+    new Client[]
+    {
+        //m2m flow
+        //Un client de type machine-to-machine (M2M), c’est une application ou un service backend (sans interface utilisateur humaine)
+        //qui a besoin d'accéder à une API sécurisée, en s'identifiant par lui-même — sans login/password d’un utilisateur.
+        // Exemple concret : [Service Commande] ────► [Service Catalogue]
+        // Le Service Commande a besoin d’accéder à l’API Catalog pour récupérer les produits disponibles.
+        // Il n’y a pas d’utilisateur humain connecté.
+        // C’est le service lui-même qui s’identifie auprès du serveur d’identité (IdentityServer).
+        // Il le fait via un Client ID + Client Secret.
+        // Il obtient un token JWT qu’il utilise pour accéder à l’API Catalog.
+        // C’est ça, un client machine-to-machine.
+        new Client
         {
-            // m2m client credentials flow client
-            new Client
-            {
-                ClientId = "m2m.client",
-                ClientName = "Client Credentials Client",
-
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
-                ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-                AllowedScopes = { "scope1" }
-            },
-
-            // interactive client using code flow + pkce
-            new Client
-            {
-                ClientId = "interactive",
-                ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-                    
-                AllowedGrantTypes = GrantTypes.Code,
-
-                RedirectUris = { "https://localhost:44300/signin-oidc" },
-                FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-                AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "scope2" }
-            },
+            ClientName = "Catalog API Client",
+            ClientId = "CatalogApiClient",
+            ClientSecrets = {new Secret("5c6eb3b4-4668-ac57-2b4591ec26d2".Sha256())},
+            AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
+            AllowedScopes = {"catalogapi"}
+        }
         };
 }
