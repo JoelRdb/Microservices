@@ -5,6 +5,7 @@ using Catalog.Core.Repositories;
 using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Common.Logging;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 using System.Reflection;
 
@@ -46,6 +47,15 @@ builder.Services.AddScoped<IProductRepository, ProductRepositoy>();
 builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+
+// Identity Server changes
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https:localhost:9009";
+        options.Audience = "Catalog";
+    });
+
 
 var app = builder.Build();
 
