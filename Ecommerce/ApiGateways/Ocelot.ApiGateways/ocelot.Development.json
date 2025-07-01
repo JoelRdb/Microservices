@@ -2,7 +2,7 @@
   "Routes": [
     //Catalog API
     { // Ocelot redirige vers
-      "DownstreamPathTemplate": "/ai/v1/Catalog",
+      "DownstreamPathTemplate": "/api/v1/Catalog",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
