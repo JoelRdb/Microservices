@@ -39,25 +39,33 @@ public static class Config
             }
         };
     public static IEnumerable<Client> Clients =>
-    new Client[]
-    {
-        //m2m flow
-        //Un client de type machine-to-machine (M2M), c’est une application ou un service backend (sans interface utilisateur humaine)
-        //qui a besoin d'accéder à une API sécurisée, en s'identifiant par lui-même — sans login/password d’un utilisateur.
-        // Exemple concret : [Service Commande] ────► [Service Catalogue]
-        // Le Service Commande a besoin d’accéder à l’API Catalog pour récupérer les produits disponibles.
-        // Il n’y a pas d’utilisateur humain connecté.
-        // C’est le service lui-même qui s’identifie auprès du serveur d’identité (IdentityServer).
-        // Il le fait via un Client ID + Client Secret.
-        // Il obtient un token JWT qu’il utilise pour accéder à l’API Catalog.
-        // C’est ça, un client machine-to-machine.
-        new Client
+        new Client[]
         {
-            ClientName = "Catalog API Client",
-            ClientId = "CatalogApiClient",
-            ClientSecrets = {new Secret("5c6eb3b4-4668-ac57-2b4591ec26d2".Sha256())},
-            AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
-            AllowedScopes = {"catalogapi", "basketapi"}
-        }
-        };
+            //m2m flow
+            //Un client de type machine-to-machine (M2M), c’est une application ou un service backend (sans interface utilisateur humaine)
+            //qui a besoin d'accéder à une API sécurisée, en s'identifiant par lui-même — sans login/password d’un utilisateur.
+            // Exemple concret : [Service Commande] ────► [Service Catalogue]
+            // Le Service Commande a besoin d’accéder à l’API Catalog pour récupérer les produits disponibles.
+            // Il n’y a pas d’utilisateur humain connecté.
+            // C’est le service lui-même qui s’identifie auprès du serveur d’identité (IdentityServer).
+            // Il le fait via un Client ID + Client Secret.
+            // Il obtient un token JWT qu’il utilise pour accéder à l’API Catalog.
+            // C’est ça, un client machine-to-machine.
+            new Client
+            {
+                ClientName = "Catalog API Client",
+                ClientId = "CatalogApiClient",
+                ClientSecrets = {new Secret("5c6eb3b4-4668-ac57-2b4591ec26d2".Sha256())},
+                AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
+                AllowedScopes = {"catalogapi"}
+            },
+            new Client
+            {
+                ClientName = "Basket API Client",
+                ClientId = "BasketApiClient",
+                ClientSecrets = {new Secret("3c6nb3b4-4667-ae57-2b4591ec26n2".Sha256())},
+                AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
+                AllowedScopes = {"basketapi"}
+            }
+         };
 }
