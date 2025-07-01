@@ -6,6 +6,8 @@ using Catalog.Infrastructure.Data;
 using Catalog.Infrastructure.Repositories;
 using Common.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
 using System.Reflection;
 
@@ -16,8 +18,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Serilog configuration
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
-
-builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 
 //Add API versioning
@@ -47,6 +47,15 @@ builder.Services.AddScoped<IProductRepository, ProductRepositoy>();
 builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+
+
+var userPolicy = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+builder.Services.AddControllers(config =>
+    {
+        config.Filters.Add(new AuthorizeFilter(userPolicy));
+    });
 
 // Identity Server changes : after install of Ecommerce.Identity with Duende
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
