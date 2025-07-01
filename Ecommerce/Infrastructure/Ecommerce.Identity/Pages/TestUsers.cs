@@ -1,11 +1,11 @@
 // Copyright (c) Duende Software. All rights reserved.
 // See LICENSE in the project root for license information.
 
-using IdentityModel;
 using System.Security.Claims;
 using System.Text.Json;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Test;
+using Duende.IdentityModel;
 
 namespace Ecommerce.Identity;
 
@@ -25,6 +25,17 @@ public static class TestUsers
                 
             return new List<TestUser>
             {
+                new TestUser
+                {
+                    SubjectId = "00706d6b-4a09-43df-a762-eee7d03ef12b",
+                    Username = "joel",
+                    Password = "joel",
+                    Claims = new List<Claim>
+                    {
+                        new Claim(JwtClaimTypes.GivenName, "joel"),
+                        new Claim(JwtClaimTypes.FamilyName, "randriambao")
+                    }
+                },
                 new TestUser
                 {
                     SubjectId = "1",
