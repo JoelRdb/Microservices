@@ -48,11 +48,11 @@ builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 
-// Identity Server changes
+// Identity Server changes : after install of Ecommerce.Identity with Duende
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https:localhost:9009";
+        options.Authority = "https://localhost:9009";
         options.Audience = "Catalog";
     });
 
@@ -73,12 +73,15 @@ app.MapOpenApi();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseAuthentication();
+
 // Rediriger automatiquement "/" vers Swagger
 app.MapGet("/", context =>
 {
     context.Response.Redirect("/swagger");
     return Task.CompletedTask;
 });
+
 
 app.UseAuthorization();
 
