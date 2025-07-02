@@ -26,6 +26,7 @@ public static class Config
             new ApiScope("basketapi"),
             new ApiScope("catalogapi.read"),
             new ApiScope("catalogapi.write"),
+            new ApiScope("ecommercegateway"),
         };
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
@@ -38,6 +39,10 @@ public static class Config
             new ApiResource("Basket", "Basket.API")
             {
                 Scopes = {"basketapi"}
+            },
+            new ApiResource("ECommerceGateway", "ECommerce Gateway")
+            {
+                Scopes = { "ecommercegateway" }
             }
         };
     public static IEnumerable<Client> Clients =>
@@ -68,6 +73,14 @@ public static class Config
                 ClientSecrets = {new Secret("3c6nb3b4-4667-ae57-2b4591ec26n2".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
                 AllowedScopes = {"basketapi"}
+            },
+            new Client
+            {
+                ClientName = "ECommerce Gateway Client",
+                ClientId = "ECommerceGateway",
+                ClientSecrets = {new Secret("3c6nb3b5-4667-az57-2b4691ed21n0".Sha256())},
+                AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
+                AllowedScopes = { "ecommercegateway" }
             }
          };
 }
