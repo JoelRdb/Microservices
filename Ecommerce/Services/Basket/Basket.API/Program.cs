@@ -97,6 +97,7 @@ builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(
 var userPolicy = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
+
 builder.Services.AddControllers(config =>
 {
     config.Filters.Add(new AuthorizeFilter(userPolicy));
@@ -136,7 +137,7 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();

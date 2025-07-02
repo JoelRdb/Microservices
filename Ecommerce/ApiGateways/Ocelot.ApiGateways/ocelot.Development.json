@@ -3,7 +3,7 @@
     //Catalog API
     { // Ocelot redirige vers
       "DownstreamPathTemplate": "/api/v1/Catalog",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -16,7 +16,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -28,7 +28,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -40,7 +40,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -52,7 +52,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -64,7 +64,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByBrandName/{brand}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -77,7 +77,7 @@
     //  Basket API
     {
       "DownstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -89,7 +89,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -100,8 +100,20 @@
       "UpstreamHttpMethod": [ "DELETE" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Basket",
+      "DownstreamScheme" : "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "host.docker.internal",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/Basket",
+      "UpstreamHttpMethod": ["POST"]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -111,12 +123,12 @@
       "UpstreamPathTemplate": "/Basket/CreateBasket",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
-        "AuthenticationProvideKey": "ECommerceGatewayAuthScheme"
+        "AuthenticationProviderKey": "ECommerceGatewayAuthScheme"
       }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -142,7 +154,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v2/Basket/Checkout",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -162,7 +174,7 @@
     // Discount API
     {
       "DownstreamPathTemplate": "/api/v1/Discount/{productName}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -174,7 +186,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Discount",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -187,7 +199,7 @@
     // Order API
     {
       "DownstreamPathTemplate": "/api/v1/Order/{userName}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -199,6 +211,6 @@
     }
   ],
     "GlobalConfiguration" : {
-      "BaseUrl" :  "http://localhost:8010"
+      "BaseUrl" :  "https://localhost:8010"
     }
 }

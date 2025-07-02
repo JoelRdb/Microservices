@@ -16,13 +16,13 @@
       }
     },
     "OcelotApiGateway": {
-      "commandLineArgs": "Project",
+      "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local"
       },
       "dotnetRunMessages": "true",
-      "applicationUrl": "http://localhost:9010"
+      "applicationUrl": "https://localhost:8010"
     },
     "Docker": {
       "commandName": "Docker",
