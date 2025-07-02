@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Ocelot.Cache.CacheManager;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
@@ -19,19 +18,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         options.Authority = "https://localhost:9009";
         options.Audience = "ECommerceGateway";
-        options.RequireHttpsMetadata = false;
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "https://localhost:9009",
-            ValidateAudience = true,
-            ValidAudience = "ECommerceGateway",
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
-        };
     });
-
 
 
 builder.Services.AddOcelot(builder.Configuration)

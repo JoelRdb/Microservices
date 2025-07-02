@@ -56,11 +56,11 @@ services:
         context: .
         dockerfile: ApiGateways/Ocelot.ApiGateways/Dockerfile
 
-  # identityserver:
-  #   image: ${DOCKER_REGISTRY-}identityserver
-  #   build:
-  #      context: .
-  #      dockerfile: Infrastructure/Ecommerce.Identity/Dockerfile
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+       context: .
+       dockerfile: Infrastructure/Ecommerce.Identity/Dockerfile
 
 volumes:
   mongo_data: 
