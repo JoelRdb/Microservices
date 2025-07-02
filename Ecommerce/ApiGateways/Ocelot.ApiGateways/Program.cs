@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,14 @@ using Ocelot.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+var authScheme = "ECommerceGatewayAuthScheme";
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(authScheme, options =>
+    {
+        options.Authority = "http://localhost:9009";
+        options.Audience = "ECommerceGateway";
+    });
 
 builder.Configuration.AddJsonFile($"ocelot.{builder.Environment.EnvironmentName}.json", true, true);
 

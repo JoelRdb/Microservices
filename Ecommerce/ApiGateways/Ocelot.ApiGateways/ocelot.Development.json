@@ -109,7 +109,10 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket/CreateBasket",
-      "UpstreamHttpMethod": [ "POST" ]
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProvideKey": "ECommerceGatewayAuthScheme"
+      }
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
