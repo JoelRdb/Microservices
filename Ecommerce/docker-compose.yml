@@ -62,6 +62,11 @@ services:
        context: .
        dockerfile: Infrastructure/Ecommerce.Identity/Dockerfile
 
+  reverseproxy:
+    build:
+       context: .
+       dockerfile: nginx/nginx.Dockerfile
+
 volumes:
   mongo_data: 
   portainer_data:
