@@ -1,5 +1,6 @@
 using Duende.IdentityServer;
 using Ecommerce.Identity;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Serilog;
 
@@ -51,7 +52,15 @@ internal static class HostingExtensions
     public static WebApplication ConfigurePipeline(this WebApplication app)
     { 
         app.UseSerilogRequestLogging();
-    
+
+        var forwardHeaderOptions = new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        };
+        forwardHeaderOptions.KnownNetworks.Clear(); //Supprime les restrictions IP sur les réseaux connus
+        forwardHeaderOptions.KnownProxies.Clear(); //Supprime les restrictions IP sur les proxies connus
+        app.UseForwardedHeaders(forwardHeaderOptions);
+
         if (app.Environment.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
