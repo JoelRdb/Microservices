@@ -3,7 +3,7 @@ services:
     container_name: nginxgateway
     restart: always
     ports:
-      - "9200:9100"
+      - "9400:9100"
     depends_on: 
       - identityserver 
       - catalog.api
