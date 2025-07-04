@@ -3,7 +3,7 @@
     //Catalog API
     { // Ocelot redirige vers
       "DownstreamPathTemplate": "/api/v1/Catalog",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -16,7 +16,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -28,7 +28,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -40,7 +40,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -52,7 +52,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -64,7 +64,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByBrandName/{brand}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -77,7 +77,7 @@
     //  Basket API
     {
       "DownstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -89,7 +89,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -101,7 +101,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket",
-      "DownstreamScheme" : "https",
+      "DownstreamScheme" : "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -113,7 +113,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -128,7 +128,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -154,7 +154,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v2/Basket/Checkout",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -174,7 +174,7 @@
     // Discount API
     {
       "DownstreamPathTemplate": "/api/v1/Discount/{productName}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -186,7 +186,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Discount",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -199,7 +199,7 @@
     // Order API
     {
       "DownstreamPathTemplate": "/api/v1/Order/{userName}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "host.docker.internal",
@@ -211,6 +211,6 @@
     }
   ],
     "GlobalConfiguration" : {
-      "BaseUrl" :  "https://localhost:8010"
+      "BaseUrl" :  "http://localhost:8010"
     }
 }
