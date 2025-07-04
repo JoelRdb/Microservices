@@ -3,7 +3,7 @@ services:
     container_name: nginxgateway
     restart: always
     ports:
-      - "44344:443"
+      - "44344:44344"
     depends_on: 
       - identityserver 
       - catalog.api
@@ -94,6 +94,7 @@ services:
     container_name: catalog.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8000 
       - "DatabaseSettings__ConnectionStrings=mongodb://catalogdb:27017"
       - "DatabaseSettings__DatabaseName=CatalogDb"
       - "DatabaseSettings__CollectionName=Products"
@@ -108,6 +109,7 @@ services:
     container_name: basket.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8001
       - "CacheSettings__ConnectionString=basketdb:6379"
       - "GrpcSettings__DiscountUrl=http://discount.api:8080"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
@@ -121,6 +123,7 @@ services:
     container_name: discount.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8002
       - "DatabaseSettings__ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=Password@1;"
     depends_on:
       discountdb:
@@ -132,6 +135,7 @@ services:
     container_name: ordering.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://*:8003
       - "ConnectionStrings__OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=Joel1234567;TrustServerCertificate=True"
       - "EventBusSettings__HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
@@ -180,7 +184,7 @@ services:
   identityserver:
     container_name: identityserver
     environment:
-      - ASPNETCORE_URLS=http://*:9011
+      - ASPNETCORE_URLS=http://*:9011 
     ports:
       - "9011:9011"
 
