@@ -180,7 +180,7 @@ services:
   identityserver:
     container_name: identityserver
     environment:
-      - ASPNETCORE_URL=http//*:9009
+      - ASPNETCORE_URL=http//*:9011
     ports:
       - "9009:9009"
 

@@ -60,6 +60,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecommerce.Identity", "Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nginx", "nginx", "{407957DF-FCA7-43EE-8F7B-8A810DF62BDB}"
 	ProjectSection(SolutionItems) = preProject
+		ApiGateways\nginx\id-local.conf = ApiGateways\nginx\id-local.conf
 		ApiGateways\nginx\nginx.Dockerfile = ApiGateways\nginx\nginx.Dockerfile
 		ApiGateways\nginx\nginx.local.conf = ApiGateways\nginx\nginx.local.conf
 	EndProjectSection
