@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Catalog.Application.Handlers;
 using Catalog.Application.Responses;
 using Catalog.Core.Repositories;
@@ -7,9 +8,11 @@ using Catalog.Infrastructure.Repositories;
 using Common.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Serilog;
 using System.Reflection;
+using IApiVersionDescriptionProvider = Asp.Versioning.ApiExplorer.IApiVersionDescriptionProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +29,23 @@ builder.Services.AddApiVersioning(options =>
     options.ReportApiVersions = true;
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
+})
+// Add Versioned API Explorer to support versioning
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
 });
+
+// Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+});
+
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -61,7 +80,7 @@ builder.Services.AddControllers(config =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009";
+        options.Authority = "https://id-local.eshopping.com:44344";
         options.Audience = "Catalog";
     });
 builder.Services.AddAuthorization(options =>
@@ -73,12 +92,33 @@ builder.Services.AddAuthorization(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+var nginxPath = "/catalog";
+if (app.Environment.IsEnvironment("Local"))
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog.API v1"));
+}
 if (app.Environment.IsDevelopment())
 {
-    //app.MapOpenApi();
-    //app.UseSwagger();
-    //app.UseSwaggerUI();
     app.UseDeveloperExceptionPage();
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+                $"Catalog API {description.GroupName.ToUpperInvariant()}");
+            options.RoutePrefix = string.Empty;
+        }
+
+        options.DocumentTitle = "Catalog API Documentation";
+    });
 }
 
 // Active Swagger tout le temps
@@ -97,7 +137,7 @@ app.MapGet("/", context =>
 
 
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();

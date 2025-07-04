@@ -24,6 +24,8 @@ public static class Config
         {
             new ApiScope("catalogapi"),
             new ApiScope("basketapi"),
+            new ApiScope("discountapi"),
+            new ApiScope("orderingapi"),
             new ApiScope("catalogapi.read"),
             new ApiScope("catalogapi.write"),
             new ApiScope("ecommercegateway"),
@@ -39,6 +41,14 @@ public static class Config
             new ApiResource("Basket", "Basket.API")
             {
                 Scopes = {"basketapi"}
+            },
+            new ApiResource("Discount", "Discount.API")
+            {
+                Scopes = { "discountapi" }
+            },
+            new ApiResource("Ordering", "Ordering.API")
+            {
+                Scopes = { "orderingapi" }
             },
             new ApiResource("ECommerceGateway", "ECommerce Gateway")
             {
@@ -80,7 +90,7 @@ public static class Config
                 ClientId = "ECommerceGatewayClient",
                 ClientSecrets = {new Secret("3c6nb3b5-4667-az57-2b4691ed21n0".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
-                AllowedScopes = { "ecommercegateway", "basketapi" }
+                AllowedScopes = { "ecommercegateway", "basketapi", "discountapi", "orderingapi" }
             }
          };
 }

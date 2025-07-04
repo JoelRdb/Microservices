@@ -5,15 +5,15 @@ using Basket.Infrastructure.Repositories;
 using Common.Logging;
 using Discount.Grpc.Proto;
 using MassTransit;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
-using Asp.Versioning;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.HttpOverrides;
+using IApiVersionDescriptionProvider = Asp.Versioning.ApiExplorer.IApiVersionDescriptionProvider;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +37,14 @@ builder.Services.AddApiVersioning(options =>
     options.SubstituteApiVersionInUrl = true;
 });
 
+// Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+});
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 //builder.Services.AddOpenApi();
@@ -107,7 +115,7 @@ builder.Services.AddControllers(config =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://localhost:9009";
+        options.Authority = "https://id-local.eshopping.com:44344";
         options.Audience = "Basket";
     });
 
@@ -124,14 +132,32 @@ builder.Services.AddMassTransitHostedService();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var nginxPath = "/basket";
+if (app.Environment.IsEnvironment("Local"))
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1"));
+}
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Basket.API v1");
-        c.SwaggerEndpoint("/swagger/v2/swagger.json", "Basket.API v2");
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+                $"Basket API {description.GroupName.ToUpperInvariant()}");
+            options.RoutePrefix = string.Empty;
+        }
+
+        options.DocumentTitle = "Basket API Documentation";
     });
 }
 

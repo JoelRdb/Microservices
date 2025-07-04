@@ -4,6 +4,7 @@ using Discount.Application.Handlers;
 using Discount.Core.Repositories;
 using Discount.Infrastructure.Extensions;
 using Discount.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 using System.Reflection;
 
@@ -14,6 +15,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Serilog configuration
 builder.Host.UseSerilog(Logging.ConfigureLogger);
 
+// Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+});
+
+// Identity Server changes
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://id-local.eshopping.com:44344";
+        options.Audience = "Discount";
+    });
 
 // Register AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

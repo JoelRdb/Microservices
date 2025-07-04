@@ -1,7 +1,10 @@
 using Asp.Versioning;
+using Asp.Versioning.ApiExplorer;
 using Common.Logging;
 using EventBus.Messages.E_vents.Common;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Ordering.API.EventBusConsumer;
 using Ordering.API.Extensions;
 using Ordering.Application.Extensions;
@@ -23,8 +26,30 @@ builder.Services.AddApiVersioning(options =>
     options.ReportApiVersions = true;
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = new ApiVersion(1, 0);
+})
+// Add Versioned API Explorer to support versioning
+.AddApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
 });
 
+//Policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+});
+
+// Identity Server
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.Authority = "https://id-local.eshopping.com:44344";
+        options.Audience = "Ordering";
+    });
 // Application Services
 builder.Services.AddApplicationServices();
 
@@ -71,11 +96,33 @@ app.MigrateDatabase<OrderContext>((context, services) =>
 });
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var nginxPath = "/ordering";
+if (app.Environment.IsEnvironment("Local"))
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Ordering.API v1"));
+}
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseForwardedHeaders(new ForwardedHeadersOptions
+    {
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+    });
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+        foreach (var description in provider.ApiVersionDescriptions)
+        {
+            options.SwaggerEndpoint($"{nginxPath}/swagger/{description.GroupName}/swagger.json",
+                $"Ordering API {description.GroupName.ToUpperInvariant()}");
+            options.RoutePrefix = string.Empty;
+        }
+
+        options.DocumentTitle = "Catalog API Documentation";
+    });
 }
 // Rediriger automatiquement "/" vers Swagger
 app.MapGet("/", context =>
