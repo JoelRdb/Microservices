@@ -36,7 +36,8 @@ public static class Config
             // List of Microservices can go here : Définit l'API protégée
             new ApiResource("Catalog", "Catalog.API") //Name: Catalog (audience in Program.cs for Catalog) and Catalog.API : DisplayName
             {
-                Scopes = { "catalogapi.read", "catalogapi.write" }
+                //Scopes = { "catalogapi.read", "catalogapi.write" }
+                Scopes = { "catalogapi" }
             },
             new ApiResource("Basket", "Basket.API")
             {
@@ -90,7 +91,7 @@ public static class Config
                 ClientId = "ECommerceGatewayClient",
                 ClientSecrets = {new Secret("3c6nb3b5-4667-az57-2b4691ed21n0".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
-                AllowedScopes = { "ecommercegateway", "basketapi", "discountapi", "orderingapi" }
+                AllowedScopes = { "ecommercegateway", "catalogapi", "basketapi", "discountapi", "orderingapi" }
             }
          };
 }

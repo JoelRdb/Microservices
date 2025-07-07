@@ -120,12 +120,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidIssuer = "https://id-local.eshopping.com", // Issuer du token
-            ValidateAudience = true,
+            ValidateIssuer = true, // Indique que l'émetteur doit être validé
+            ValidIssuer = "https://id-local.eshopping.com", // // L'émetteur exact attendu (issu de votre token)
+            ValidateAudience = true, // Indique que l'audience doit être validée
             ValidAudience = "Basket", // Audience pour Basket.API
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true
+            ValidateLifetime = true, // Indique que la durée de vie doit être validée (exp, nbf)
+            ValidateIssuerSigningKey = true // Indique que la clé de signature doit être validée
         };
     });
 

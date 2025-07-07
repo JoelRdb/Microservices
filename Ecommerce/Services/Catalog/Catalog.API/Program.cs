@@ -80,8 +80,18 @@ builder.Services.AddControllers(config =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://id-local.eshopping.com:44344";
-        options.Audience = "Catalog";
+    options.Authority = "http://identityserver:9011";
+    options.Audience = "Catalog";
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer  = true,
+            ValidIssuer = "https://id-local.eshopping.com",
+            ValidateAudience = true,
+            ValidAudience = "Catalog",
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
     });
 builder.Services.AddAuthorization(options =>
 {
@@ -136,8 +146,8 @@ app.MapGet("/", context =>
 });
 
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

@@ -27,6 +27,18 @@
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     },
     {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByProductName/{productName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Catalog/GetProductByProductName/{productName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -101,7 +113,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket",
-      "DownstreamScheme" : "http",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
@@ -109,7 +121,7 @@
         }
       ],
       "UpstreamPathTemplate": "/Basket",
-      "UpstreamHttpMethod": ["POST"]
+      "UpstreamHttpMethod": [ "POST" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
@@ -202,12 +214,24 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "discount.api",
+          "Host": "ordering.api",
           "Port": "8003"
         }
       ],
       "UpstreamPathTemplate": "/Order/{userName}",
       "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/DeleteOrder/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "8003"
+        }
+      ],
+      "UpstreamPathTemplate": "/Order/DeleteOrder/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
     }
   ],
   "GlobalConfiguration": {

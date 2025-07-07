@@ -47,8 +47,18 @@ builder.Services.AddCors(options =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://id-local.eshopping.com:44344";
+        options.Authority = "http://identityserver:9011";
         options.Audience = "Ordering";
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true, // Indique que l'émetteur doit être validé
+            ValidIssuer = "https://id-local.eshopping.com", // // L'émetteur exact attendu (issu de votre token)
+            ValidateAudience = true, // Indique que l'audience doit être validée
+            ValidAudience = "Ordering", // Audience pour Basket.API
+            ValidateLifetime = true, // Indique que la durée de vie doit être validée (exp, nbf)
+            ValidateIssuerSigningKey = true // Indique que la clé de signature doit être validée
+        };
     });
 // Application Services
 builder.Services.AddApplicationServices();

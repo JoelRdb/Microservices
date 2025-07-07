@@ -45,7 +45,7 @@ namespace Ordering.API.Controllers
             return NoContent();
         }
 
-        [HttpDelete(Name = "DeleteOrder")]
+        [HttpDelete("[action]/{id}", Name = "DeleteOrder")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteOrder(int id)
