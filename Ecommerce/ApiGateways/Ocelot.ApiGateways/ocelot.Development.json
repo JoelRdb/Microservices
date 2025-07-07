@@ -6,7 +6,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ], // Le client fait appel
@@ -19,7 +19,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ],
@@ -31,7 +31,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ],
@@ -43,7 +43,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ],
@@ -55,7 +55,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ],
@@ -67,7 +67,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "catalog.api",
           "Port": "8000"
         }
       ],
@@ -80,7 +80,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ],
@@ -92,7 +92,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ],
@@ -104,7 +104,7 @@
       "DownstreamScheme" : "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ],
@@ -116,7 +116,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ],
@@ -131,7 +131,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ], // Si un client envoie plus d’une requête POST sur /Basket/Checkout en moins de 3 secondes,
@@ -157,7 +157,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "basket.api",
           "Port": "8001"
         }
       ],
@@ -177,7 +177,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "discount.api",
           "Port": "8002"
         }
       ],
@@ -189,7 +189,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "discount.api",
           "Port": "8002"
         }
       ],
@@ -202,7 +202,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "host.docker.internal",
+          "Host": "discount.api",
           "Port": "8003"
         }
       ],
@@ -210,7 +210,7 @@
       "UpstreamHttpMethod": [ "GET" ]
     }
   ],
-    "GlobalConfiguration" : {
-      "BaseUrl" :  "http://localhost:8010"
-    }
+  "GlobalConfiguration": {
+    "BaseUrl": "https://id-local.eshopping.com:44344"
+  }
 }

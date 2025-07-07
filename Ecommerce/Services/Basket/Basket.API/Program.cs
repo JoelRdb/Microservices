@@ -115,8 +115,18 @@ builder.Services.AddControllers(config =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = "https://id-local.eshopping.com:44344";
+        options.Authority = "http://identityserver:9011";
         options.Audience = "Basket";
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "https://id-local.eshopping.com", // Issuer du token
+            ValidateAudience = true,
+            ValidAudience = "Basket", // Audience pour Basket.API
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true
+        };
     });
 
 
@@ -144,7 +154,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseForwardedHeaders(new ForwardedHeadersOptions
     {
-        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost
     });
     app.UseSwagger();
     app.UseSwaggerUI(options =>
@@ -161,9 +171,9 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-
-app.UseAuthorization();
+app.UseRouting();
 app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
