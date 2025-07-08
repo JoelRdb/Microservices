@@ -1,5 +1,5 @@
 ﻿{
-  "Routes": [
+  "Routes": [ // FOR POSTMAN (eg: ) "https://id-local.eshopping.com:44344/Catalog/GetAllProducts" => https://id-local.eshopping.com:44344/api/v1/Catalog/GetAllProducts
     //Catalog API
     { // Ocelot redirige vers
       "DownstreamPathTemplate": "/api/v1/Catalog",
@@ -231,6 +231,240 @@
         }
       ],
       "UpstreamPathTemplate": "/Order/DeleteOrder/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    // FOR SWAGGER
+    //Catalog API swagger
+    { // Ocelot redirige vers
+      "DownstreamPathTemplate": "/api/v1/Catalog",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ], // Le client fait appel
+      "UpstreamPathTemplate": "/api/v1/Catalog",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByProductName/{productName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetProductByProductName/{productName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Catalog/GetProductByBrandName/{brand}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "8000"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Catalog/GetProductByBrandName/{brand}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    //  Basket API swagger
+    {
+      "DownstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
+      "UpstreamHttpMethod": [ "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Basket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Basket",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Basket/CreateBasket",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Basket/CreateBasket",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "ECommerceGatewayAuthScheme"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ], // Si un client envoie plus d’une requête POST sur /Basket/Checkout en moins de 3 secondes,
+      //il recevra une erreur HTTP 429 (Too Many Requests). Exmple : 
+      //    | Heure    | Action du client        | Résultat |
+      //    | -------- | ----------------------- | -------- |
+      //    | 10:00:00 | `POST /Basket/Checkout` | ✅ OK     |
+      //    | 10:00:01 | `POST /Basket/Checkout` | ❌ 429    |
+      //    | 10:00:04 | `POST /Basket/Checkout` | ✅ OK     |
+
+      "UpstreamPathTemplate": "/api/v1/Basket/Checkout",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "ClientWhiteList": [],
+        "EnableRateLimiting": true,
+        "Period": "3s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v2/Basket/Checkout",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v2/Basket/CheckoutV2",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "ClientWhiteList": [],
+        "EnableRateLimiting": true,
+        "Period": "3s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    // Discount API swagger
+    {
+      "DownstreamPathTemplate": "/api/v1/Discount/{productName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "discount.api",
+          "Port": "8002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Discount/{productName}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Discount",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "discount.api",
+          "Port": "8002"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Discount",
+      "UpstreamHttpMethod": [ "PUT", "POST" ]
+    },
+    // Order API swagger
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/{userName}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "8003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/{userName}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Order/DeleteOrder/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "8003"
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/Order/DeleteOrder/{id}",
       "UpstreamHttpMethod": [ "DELETE" ]
     }
   ],
