@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.HttpOverrides;
 using IApiVersionDescriptionProvider = Asp.Versioning.ApiExplorer.IApiVersionDescriptionProvider;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,30 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v1" });
     c.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Basket.API", Version = "v2" });
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Entrez 'Bearer' [espace] et votre token JWT dans le champs ci-dessous.",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    //Ajouter cette section pour indiquer que toutes les opérations (ou certains) utilisent ce schéma de sécurité
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+            {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer" //Fait référence au schéma ci-dessus
+            }
+        },
+            new string[] {} //Scopes requis, vide pour l'instant si vous ne les gérez pas ici
+        }
+    });
 
     //Include XML comments 
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -168,6 +193,11 @@ if (app.Environment.IsDevelopment())
         }
 
         options.DocumentTitle = "Basket API Documentation";
+
+        //Configuration pour le bouton Authorize
+        options.OAuthClientId("swagger_client");
+        options.OAuthAppName("Swagger UI for Basket.API");
+        options.OAuthUsePkce();
     });
 }
 

@@ -47,6 +47,7 @@ namespace Basket.API.Controllers
         public async Task<ActionResult<ShoppingCartResponse>> UpdateBasket([FromBody] CreateShoppingCartCommand createShoppingCartCommand)
         {            
             var basket = await _mediator.Send(createShoppingCartCommand);
+            _logger.LogInformation("Panier créé");
             return Ok(basket);
         }
 

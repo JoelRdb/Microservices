@@ -23,7 +23,7 @@ namespace Common.Logging
                 .Enrich.WithProperty("EnvironmentName", env.EnvironmentName) //// Ajoute un propriété personnalisé à chaque log :le nom de l'application
                 .Enrich.WithExceptionDetails()  //Utilise le package Serilog.Exceptions pour enrichir les logs d’erreur avec tous les détails des exceptions.
                 .MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)   // Les logs ASP.NET Core système ne seront logués qu’à partir de Warning pour éviter de polluer la console avec du bruit.
-                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", Serilog.Events.LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", Serilog.Events.LogEventLevel.Information)
                 .WriteTo.Console(); //Envoie les logs formatés dans la console (très utile en développement et dans Docker).
                 /*
                     Quand l’app tourne en environnement Development :

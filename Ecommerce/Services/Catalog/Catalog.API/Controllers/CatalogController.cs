@@ -39,9 +39,7 @@ namespace Catalog.API.Controllers
         {
             var query = new GetProductByNameQuery(productName);
             var result = await _mediator.Send(query);
-
-            _logger.LogInformation($" Product with {productName} fetched");
-
+            _logger.LogInformation($" Produit avec le nom {productName} trouvé");
             return Ok(result);
         }
 
@@ -52,6 +50,7 @@ namespace Catalog.API.Controllers
         {
             var query = new GetAllProductsQuery(catalogSpecsParams);
             var result = await _mediator.Send(query);
+            _logger.LogInformation("Tous les produits sont récupérés.");
             return Ok(result);
         }
 
@@ -63,6 +62,7 @@ namespace Catalog.API.Controllers
         {
             var query = new GetAllBrandsQuery();
             var result = await _mediator.Send(query);
+            _logger.LogInformation("Tous les modèle de produits sont récupérés.");
             return Ok(result);
         }
 
@@ -73,6 +73,7 @@ namespace Catalog.API.Controllers
         {
             var query = new GetAllTypesQuery();
             var result = await _mediator.Send(query);
+            _logger.LogInformation("Tous les types de produits sont récupérés.");
             return Ok(result);
         }
 
@@ -84,6 +85,7 @@ namespace Catalog.API.Controllers
         {
             var query = new GetProductByBrandQuery(brand);
             var result = await _mediator.Send(query);
+            _logger.LogInformation($"Le produit avec le modèle {brand} est trouvé.");
             return Ok(result);
         }
 
@@ -94,6 +96,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<ProductResponse>> CreateProduct([FromBody] CreateProductCommand productCommand)
         {
             var result = await _mediator.Send<ProductResponse>(productCommand);
+            _logger.LogInformation("Nouveau produit créé.");
             return Ok(result);
         }
 
@@ -103,6 +106,7 @@ namespace Catalog.API.Controllers
         public async Task<ActionResult<ProductResponse>> UpdateProduct([FromBody] UpdateProductCommand productCommand)
         {
             var result = await _mediator.Send(productCommand);
+            _logger.LogInformation("Mise à jour du produit effectué.");
             return Ok(result);
         }
 
@@ -113,6 +117,7 @@ namespace Catalog.API.Controllers
         {
             var command = new DeleteProductByIdCommand(id);
             var result = await _mediator.Send(command);
+            _logger.LogInformation("Produit supprimé.");
             return Ok(result);
         }
     }
