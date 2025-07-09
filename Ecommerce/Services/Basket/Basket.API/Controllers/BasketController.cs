@@ -4,6 +4,7 @@ using Basket.Application.Mappers;
 using Basket.Application.Queries;
 using Basket.Application.Responses;
 using Basket.Core.Entities;
+using Common.Logging.Correlation;
 using EventBus.Messages.Common;
 using MassTransit;
 using MediatR;
@@ -18,14 +19,17 @@ namespace Basket.API.Controllers
 
         public IMediator _mediator { get; }
         public ILogger<BasketController> _logger { get; }
+        public ICorrelationIDGenerator _correlationIDGenerator { get; }
 
         public IPublishEndpoint _publishEndpoint;
 
-        public BasketController(IMediator mediator, IPublishEndpoint publishEndpoint, ILogger<BasketController> logger)
+        public BasketController(IMediator mediator, IPublishEndpoint publishEndpoint, ILogger<BasketController> logger, ICorrelationIDGenerator correlationIDGenerator)
         {
             _mediator = mediator;
             _publishEndpoint = publishEndpoint;
             _logger = logger;
+            _correlationIDGenerator = correlationIDGenerator;
+            _logger.LogInformation("Correlation Id {correlationId}", _correlationIDGenerator.Get());
         }
 
         /// <summary>Je suis une méthode testée pour Swagger doc</summary>
