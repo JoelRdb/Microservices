@@ -19,7 +19,7 @@ namespace Catalog.Application.Handlers
         {
             var productList = await _productRepository.GetProducts(request.CatalogSpecsParams);
             var productResponseList = ProductMapper.Mapper.Map<Pagination<ProductResponse>>(productList);
-            _logger.LogDebug($"Handler : Liste de tous les produits reçu. Nombre de produits : {productList.Count}");
+            _logger.LogDebug("Handler : Liste de tous les produits reçu {@productList}, Nombre de produits :", productList, productResponseList.Count);
             return productResponseList;
         }
     }
