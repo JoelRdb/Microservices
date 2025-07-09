@@ -15,7 +15,7 @@ namespace Catalog.Infrastructure.Data
             //string path = Path.Combine("Data", "SeedData", "types.json");
             if (!checkTypes)
             {
-                var seedData = File.ReadAllText("../Catalog.Infrastructure/Data/SeedData/types.json");
+                var seedData = File.ReadAllText("Data/SeedData/types.json");
                 var types = JsonSerializer.Deserialize<List<ProductType>>(seedData);
                 if(types != null)
                 {

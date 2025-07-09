@@ -16,7 +16,7 @@ namespace Catalog.Infrastructure.Data
             //string path = Path.Combine("Data", "SeedData", "products.json");
             if (!checkProduct)
             {
-                var productData = File.ReadAllText("../Catalog.Infrastructure/Data/SeedData/products.json");
+                var productData = File.ReadAllText("Data/SeedData/products.json");
                 var data = JsonSerializer.Deserialize<List<Product>>(productData);
                 if(data != null)
                 {
