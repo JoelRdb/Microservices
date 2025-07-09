@@ -17,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using System.Security.Cryptography.Xml;
 using Microsoft.VisualBasic;
 using Microsoft.Extensions.Configuration;
+using Common.Logging.Correlation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -97,6 +98,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepositoy>();
 builder.Services.AddScoped<IBrandRepository, ProductRepositoy>();
 builder.Services.AddScoped<ITypeReposiroty, ProductRepositoy>();
 builder.Services.AddScoped<ICatalogContext, CatalogContext>();
+builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
 // Implementing Authorize Filter for use Identity Server
 var userPolicy = new AuthorizationPolicyBuilder()

@@ -1,4 +1,5 @@
 using Common.Logging;
+using Common.Logging.Correlation;
 using Discount.API.Services;
 using Discount.Application.Handlers;
 using Discount.Core.Repositories;
@@ -55,6 +56,7 @@ var assemblies = new Assembly[]
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
 builder.Services.AddGrpc();
+builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
 
 var app = builder.Build();

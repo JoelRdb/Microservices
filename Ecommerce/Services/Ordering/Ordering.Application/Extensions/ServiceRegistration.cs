@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ordering.Application.Behaviour;
 using System.Reflection;
 using FluentValidation;
+using Common.Logging.Correlation;
 
 namespace Ordering.Application.Extensions
 {
@@ -13,6 +14,7 @@ namespace Ordering.Application.Extensions
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(cfg=>cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             return services;
