@@ -1,6 +1,7 @@
 using Asp.Versioning;
 using Asp.Versioning.ApiExplorer;
 using Common.Logging;
+using Common.Logging.Correlation;
 using EventBus.Messages.E_vents.Common;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -69,6 +70,7 @@ builder.Services.AddInfraServices(builder.Configuration);
 //Consumer class
 builder.Services.AddScoped<BasketOrderingConsumer>();
 builder.Services.AddScoped<BasketOrderingConsumerV2>();
+builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Ordering.API", Version = "v1" }); });
