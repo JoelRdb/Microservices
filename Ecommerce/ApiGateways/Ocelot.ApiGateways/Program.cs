@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Common.Logging.Correlation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -35,7 +36,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddOcelot(builder.Configuration)
     .AddCacheManager(o => o.WithDictionaryHandle());
 
-
+builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
 var app = builder.Build();
 
@@ -44,6 +45,7 @@ if(app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 
+app.AddCorrelationIdMiddleware();
 app.UseRouting();
 
 app.MapGet("/", () => "Hello Ocelot");

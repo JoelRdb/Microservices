@@ -5,7 +5,8 @@ using System.Diagnostics;
 using System.Xml;
 
 namespace Common.Logging.Correlation
-{ // Définir un middleware qui gère l'ID de correlation (X-Correlation-Id) pour chaque requete HTTP pour suivre une requete à travers plusieurs services (tracing distribué).
+{ // Définir un middleware qui gère l'ID de correlation (X-Correlation-Id) pour chaque requete HTTP
+  // pour suivre une requete à travers plusieurs services (tracing distribué).
     public class CorrelationIDGeneratorMiddleware
     {
         private readonly RequestDelegate _next;
