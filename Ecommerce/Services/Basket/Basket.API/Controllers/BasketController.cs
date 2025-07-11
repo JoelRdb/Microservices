@@ -76,6 +76,7 @@ namespace Basket.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> Checkout([FromBody] BasketCheckout basketCheckout)
         {
+            // Get existing basket with username
             var query = new GetBasketByUserNameQuery(basketCheckout.UserName);
             var basket = await _mediator.Send(query);
             if(basket == null)
@@ -84,10 +85,11 @@ namespace Basket.API.Controllers
             }
             var eventMsg = BasketMapper.Mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMsg.TotalPrice = basket.TotalPrice;
+            eventMsg.CorrelationId = _correlationIDGenerator.Get();
             await _publishEndpoint.Publish(eventMsg);
 
             _logger.LogInformation($"Basket Published for {basket.UserName}");
-
+            //remove the basket
             var deleteCmd = new DeleteBasketByUserNameCommand(basket.UserName);
             await _mediator.Send(deleteCmd);
             return Accepted();

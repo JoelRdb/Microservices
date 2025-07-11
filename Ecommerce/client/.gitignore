@@ -1,0 +1,48 @@
+# Angular build output
+/dist
+/tmp
+/out-tsc
+/.angular/
+.bazel-out
+
+# Node dependencies
+/node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Logs
+*.log
+*.tsbuildinfo
+
+# Environment files
+*.env
+src/environments/*.local.ts
+src/environments/*.dev.ts
+src/environments/*.test.ts
+
+# Coverage reports
+/coverage
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IDEs
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VSCode History plugin
+.history/
+
+# System files
+.DS_Store
+Thumbs.db
