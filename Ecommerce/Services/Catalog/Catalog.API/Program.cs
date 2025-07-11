@@ -101,35 +101,35 @@ builder.Services.AddScoped<ICatalogContext, CatalogContext>();
 builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
 // Implementing Authorize Filter for use Identity Server
-var userPolicy = new AuthorizationPolicyBuilder()
-    .RequireAuthenticatedUser()
-    .Build();
-builder.Services.AddControllers(config =>
-    {
-        config.Filters.Add(new AuthorizeFilter(userPolicy));
-    });
+//var userPolicy = new AuthorizationPolicyBuilder()
+//    .RequireAuthenticatedUser()
+//    .Build();
+//builder.Services.AddControllers(config =>
+//    {
+//        config.Filters.Add(new AuthorizeFilter(userPolicy));
+//    });
 
-// Identity Server changes : after install of Ecommerce.Identity with Duende
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-    options.Authority = "http://identityserver:9011";
-    options.Audience = "Catalog";
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-        {
-            ValidateIssuer  = true, // Indique que l'émetteur doit être validé
-            ValidIssuer = "https://id-local.eshopping.com", // L'émetteur exact attendu (issu de votre token)
-            ValidateAudience = true, // Indique que l'audience doit être validée
-            ValidAudience = "Catalog", // L'audience exacte attendue pour Ocelot
-            ValidateLifetime = true, // Indique que la durée de vie doit être validée (exp, nbf)
-            ValidateIssuerSigningKey = true // Indique que la clé de signature doit être validée
-    };
-    });
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
-});
+//// Identity Server changes : after install of Ecommerce.Identity with Duende
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//    options.Authority = "http://identityserver:9011";
+//    options.Audience = "Catalog";
+//    options.RequireHttpsMetadata = false;
+//    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+//        {
+//            ValidateIssuer  = true, // Indique que l'émetteur doit être validé
+//            ValidIssuer = "https://id-local.eshopping.com", // L'émetteur exact attendu (issu de votre token)
+//            ValidateAudience = true, // Indique que l'audience doit être validée
+//            ValidAudience = "Catalog", // L'audience exacte attendue pour Ocelot
+//            ValidateLifetime = true, // Indique que la durée de vie doit être validée (exp, nbf)
+//            ValidateIssuerSigningKey = true // Indique que la clé de signature doit être validée
+//    };
+//    });
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("CanRead", policy => policy.RequireClaim("scope", "catalogapi.read"));
+//});
 
 
 var app = builder.Build();
