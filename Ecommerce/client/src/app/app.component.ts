@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.http.get('https://id-local.eshopping.com:44344/Catalog/GetProductByBrandName/Adidas').subscribe({
+    this.http.get('https://localhost:8010/Catalog/GetProductByBrandName/Adidas').subscribe({
       next:response => console.log(response),
       error: error => console.log(error),
       complete:() => {

@@ -173,8 +173,8 @@ app.UseSwaggerUI(options =>
 
 
 app.UseRouting(); // Important : doit être avant UseAuthentication/UseAuthorization
-app.UseAuthentication(); 
-app.UseAuthorization(); 
+//app.UseAuthentication(); 
+//app.UseAuthorization(); 
 app.MapControllers();
 
 app.Run();
