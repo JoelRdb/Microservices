@@ -1,5 +1,36 @@
-  <ul>
-    <li class="list-unstyled" *ngFor="let product of products">
-      {{ product.name }}
-    </li>
-  </ul>
+<div class="container">
+  <div class="row">
+    <section class="col-3">
+      <h5 class="text-warning ml-3">Catagory</h5>
+      <ul class="list-group my-3">
+        <li class="list-group-item active">abc</li>
+        <li class="list-group-item">def</li>
+        <li class="list-group-item">ghi</li>
+        <li class="list-group-item">jkl</li>
+        <li class="list-group-item">mno</li>
+      </ul>
+      <h5 class="text-warning ml-3">Products</h5>
+      <ul class="list-group my-3">
+        <li class="list-group-item active">Product 1</li>
+        <li class="list-group-item">Product 2</li>
+        <li class="list-group-item">Product 3</li>  
+        <li class="list-group-item">Product 4</li>
+        <li class="list-group-item">Product 5</li>
+      </ul>
+    </section>
+
+    <section class="col-9">
+      <div class="d-flex justify-content-between align-items-center pb-2">
+        <header>
+          <span>Showing <strong>10</strong> of <strong>15</strong> Results</span>
+        </header>
+        <div class="form-inline mt-2">
+          <input type="text" class="form-control mr-2" style="width: 300px;" placeholder="Search">
+          <button class="btn btn-outline-primary my-2">Search</button>
+          <button class="btn btn-outline-primary ml-2 my-2">Reset</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
