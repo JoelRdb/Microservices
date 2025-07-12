@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IProduct } from '../../shared/models/product';
 
 @Component({
   selector: 'app-product-items',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './product-items.component.scss'
 })
 export class ProductItemsComponent {
-
+  @Input() product?: IProduct;
 }

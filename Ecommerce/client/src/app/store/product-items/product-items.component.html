@@ -1,13 +1,11 @@
 <div class="card h-100 shadow-sm">
-    <img src="" alt="">
+    <img src="{{product?.imageFile}}" alt="{{product?.name}}">
     <div class="card-body d-flex flex-column">
         <a href="">
-            <h6 class="text-uppercase"></h6>
+            <h6 class="text-uppercase">{{product?.name}}</h6>
         </a>
-        <span class="mb-2"></span>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.
-            This content is a little bit longer than the other card's content to provide a bit more
-            variety.</p>
+        <span class="mb-2"> {{product?.price | currency:'Ar'}}</span> <!-- le pipe currency est un pipe intégré qui permet de formater une valeur numérique en une devise monétaire. Il fait partir de CommonModul -->
+        <p class="card-text">{{product?.description}}</p>
         <div class="btn-group mt-auto">
             <button class="btn btn-outline-secondary fa fa-shopping-cart mr-2" type="button"></button>
             <button class="btn btn-outline-secondary" type="button">View</button>
