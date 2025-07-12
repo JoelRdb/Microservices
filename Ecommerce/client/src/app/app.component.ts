@@ -5,14 +5,15 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { IProduct } from './shared/models/product';
 import { IPagination } from './shared/models/pagination';
 import { NavbarComponent } from './core/navbar/navbar.component';
+import { StoreComponent } from './store/store.component';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     HttpClientModule,
     CommonModule,
-    NavbarComponent
+    NavbarComponent,
+    StoreComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
