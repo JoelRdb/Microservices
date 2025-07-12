@@ -1,14 +1,15 @@
-<div class="card h-100 shadow-sm">
-    <img src="{{product?.imageFile}}" alt="{{product?.name}}">
-    <div class="card-body d-flex flex-column">
-        <a href="">
-            <h6 class="text-uppercase">{{product?.name}}</h6>
-        </a>
-        <span class="mb-2"> {{product?.price | currency:'Ar'}}</span> <!-- le pipe currency est un pipe intégré qui permet de formater une valeur numérique en une devise monétaire. Il fait partir de CommonModul -->
-        <p class="card-text">{{product?.description}}</p>
-        <div class="btn-group mt-auto">
-            <button class="btn btn-outline-secondary fa fa-shopping-cart mr-2" type="button"></button>
-            <button class="btn btn-outline-secondary" type="button">View</button>
+<div class="card h-100 shadow-sm" *ngIf="product">
+    <div class="image position-relative;" style="cursor: pointer;">
+        <img src="{{ product.imageFile }}" alt="{{ product.name }}" class="img-fluid bg-light">
+        <div class="d-flex align-items-center justify-content-center hover-overlay">
+            <button class="btn btn-primary fa fa-shopping-cart mr-2" type="button"></button>
+            <button class="btn btn-primary" type="button">View</button>
         </div>
+    </div>
+    <div class="card-body d-flex flex-column">
+        <a>
+            <h6 class="text-uppercase">{{ product.name}}</h6>
+        </a>
+        <span class="mb-2" style="font-size: 1.5em;"> {{product.price | currency:'Ar'}}</span> <!-- le pipe currency est un pipe intégré qui permet de formater une valeur numérique en une devise monétaire. Il fait partir de CommonModul -->
     </div>
 </div>
