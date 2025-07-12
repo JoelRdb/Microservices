@@ -30,7 +30,11 @@
           <button class="btn btn-outline-primary ml-2 my-2">Reset</button>
         </div>
       </div>
+      <div class="row row-cols-3 g-3">
+        <div class="col" *ngFor="let product of products">
+          <app-product-items></app-product-items>
+        </div>
+      </div>
     </section>
-
   </div>
 </div>

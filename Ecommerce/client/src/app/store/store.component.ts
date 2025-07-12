@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from './store.service';
 import { IProduct } from '../shared/models/product';
 import { CommonModule } from '@angular/common';
+import { ProductItemsComponent } from './product-items/product-items.component';
 
 @Component({
   selector: 'app-store',
   imports: [
-    CommonModule
+    CommonModule,
+    ProductItemsComponent,
   ],
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss'

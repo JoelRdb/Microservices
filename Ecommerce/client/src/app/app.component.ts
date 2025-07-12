@@ -13,7 +13,7 @@ import { StoreComponent } from './store/store.component';
     HttpClientModule,
     CommonModule,
     NavbarComponent,
-    StoreComponent,
+    StoreComponent,    
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
