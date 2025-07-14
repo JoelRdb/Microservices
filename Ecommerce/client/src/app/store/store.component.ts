@@ -44,13 +44,15 @@ export class StoreComponent implements OnInit {
 
   getBrands(){
     this.storeService.getBrands().subscribe({
-        next: response => this.brands = response,
+        next: response => 
+          this.brands = [{id:'', name: 'All'}, ...response],
         error: error => console.log(error),
     });
   }  
   getTypes(){
     this.storeService.getTypes().subscribe({
-        next: response => this.types = response,
+        next: response => 
+          this.types = [{id:'', name: 'All'}, ...response],
         error: error => console.log(error),
     });
   }
