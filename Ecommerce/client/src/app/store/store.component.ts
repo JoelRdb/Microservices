@@ -55,4 +55,13 @@ export class StoreComponent implements OnInit {
     });
   }
 
+  onBrandSelected(brandId: string){
+    this.storeParams.brandId = brandId;
+    this.getProducts();
+  }
+
+  onTypeSelected(typeId: string){
+    this.storeParams.typeId = typeId;
+    this.getProducts();
+  } 
 }
