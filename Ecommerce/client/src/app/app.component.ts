@@ -6,6 +6,7 @@ import { IProduct } from './shared/models/product';
 import { IPagination } from './shared/models/pagination';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { StoreComponent } from './store/store.component';
+import { HomeModule } from './home/home.module';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ import { StoreComponent } from './store/store.component';
     CommonModule,
     NavbarComponent,
     StoreComponent,    
+    HomeModule,
+    RouterOutlet
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
