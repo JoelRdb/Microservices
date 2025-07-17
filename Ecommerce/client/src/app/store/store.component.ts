@@ -7,13 +7,14 @@ import { types } from 'util';
 import { IBrand } from '../shared/models/brand';
 import { IType } from '../shared/models/type';
 import { StoreParams } from '../shared/models/storeParams';
+import { PaginationComponent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-store',
   imports: [
     CommonModule,
     ProductItemsComponent,
-
+    PaginationComponent,
   ],
   templateUrl: './store.component.html',
   styleUrl: './store.component.scss'
@@ -31,6 +32,7 @@ export class StoreComponent implements OnInit {
     {name:"Prix croissant", value:"priceAsc"},  
     {name:"Prix decroissant", value:"priceDesc"},
   ]
+  totalCount = 0;
 
   constructor(private storeService: StoreService) {}
 
@@ -42,7 +44,12 @@ export class StoreComponent implements OnInit {
   
   getProducts(){
     this.storeService.getProducts(this.storeParams).subscribe({
-        next: response => this.products = response.data,
+        next: response => {
+          this.products = response.data;
+          this.storeParams.pageNumber = response.pageIndex;
+          this.storeParams.pageSize = response.pageSize;
+          this.totalCount = response.count;
+        },
         error: error => console.log(error),
     });
   }
