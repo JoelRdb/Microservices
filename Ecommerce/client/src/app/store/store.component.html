@@ -50,6 +50,8 @@
         [boundaryLinks]="true"
         [totalItems]="this.totalCount"
         previousText="&lsaquo;"
+        (pageChanged)="onPageChanged($event)"  #Binding the method to the component context
+        [itemsPerPage]="storeParams.pageSize"
         nextText="&rsaquo;"
         firstText="&laquo;"
         lastText="&raquo;">

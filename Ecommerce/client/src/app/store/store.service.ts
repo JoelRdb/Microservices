@@ -25,6 +25,9 @@ export class StoreService {
       }
 
       params = params.append('sort', storeParams.sort);
+      params = params.append('pageIndex', storeParams.pageNumber);
+      params = params.append('size', storeParams.pageSize);
+
 
       return this.httpClient.get<IPagination<IProduct[]>>(this.baseUrl + 'Catalog/GetAllProducts', { params } );
     }
