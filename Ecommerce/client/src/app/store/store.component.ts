@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { StoreService } from './store.service';
 import { IProduct } from '../shared/models/product';
 import { CommonModule } from '@angular/common';
@@ -20,6 +20,7 @@ import { PaginationComponent } from 'ngx-bootstrap/pagination';
   styleUrl: './store.component.scss'
 })
 export class StoreComponent implements OnInit {
+@ViewChild('search') searchTerm?: ElementRef; // I want to access the input element for searching products in my html template (#search)
   /**
    *
    */
@@ -89,4 +90,21 @@ export class StoreComponent implements OnInit {
       this.getProducts();
     }
   }
+
+  onSearch() {
+    this.storeParams.search = this.searchTerm?.nativeElement.value;
+    this.storeParams.pageNumber = 1; // Reset to first page on new search 
+    this.getProducts();
+  }
+
+  onReset() {
+    if(this.searchTerm) {
+      this.searchTerm.nativeElement.value = '';
+      this.storeParams = new StoreParams();
+      this.getProducts();
+    }
+  } 
+
+
 }
+
