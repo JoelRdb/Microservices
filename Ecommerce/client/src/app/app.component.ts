@@ -21,7 +21,7 @@ import { StoreComponent } from './store/store.component';
 
 
 export class AppComponent implements OnInit{
-  title = 'VATSY MDG';
+  title = 'Vatsy';
   products: IProduct[] = []
 
   constructor(private http: HttpClient) {

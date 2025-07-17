@@ -1,6 +1,13 @@
 <div class="container">
   <div class="row">
     <section class="col-3">
+      <ng-container *ngIf="products">
+        <h5 class="text-warning mb-3">Filtre</h5>
+        <select class="custom-select mb-3" 
+          (change)="onSortSelected($any($event.target).value)">
+          <option *ngFor="let option of setOptions" [value]="option.value">{{ option.name }}</option>
+        </select>
+      </ng-container>
       <h5 class="text-warning ml-3">Brands</h5>
       <ul class="list-group my-3">
         <li 
@@ -8,8 +15,7 @@
         class="list-group-item"
         [class.active]="brand.id === this.storeParams.brandId"
         [value]="brand.id"
-        (click)="onBrandSelected(brand.id)"
-        >{{ brand.name }}</li>
+        (click)="onBrandSelected(brand.id)">{{ brand.name }}</li>
       </ul>
       <h5 class="text-warning ml-3">Types</h5>
       <ul class="list-group my-3">
@@ -18,8 +24,7 @@
          class="list-group-item"
          [class.active]="type.id === this.storeParams.typeId"
          [value]="type.id"
-         (click)="onTypeSelected(type.id)"
-         >{{ type.name }}</li>
+         (click)="onTypeSelected(type.id)">{{ type.name }}</li>
       </ul>
     </section>
 

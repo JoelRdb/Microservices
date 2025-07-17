@@ -26,6 +26,11 @@ export class StoreComponent implements OnInit {
   brands: IBrand[] = [];
   types: IType[] = [];
   storeParams = new StoreParams();
+  setOptions = [
+    {name:"Alphabetique", value:"name"},
+    {name:"Prix croissant", value:"priceAsc"},  
+    {name:"Prix decroissant", value:"priceDesc"},
+  ]
 
   constructor(private storeService: StoreService) {}
 
@@ -66,4 +71,9 @@ export class StoreComponent implements OnInit {
     this.storeParams.typeId = typeId;
     this.getProducts();
   } 
+
+  onSortSelected(sort: string){
+    this.storeParams.sort = sort;
+    this.getProducts();
+  }
 }

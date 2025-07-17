@@ -23,6 +23,9 @@ export class StoreService {
       if(storeParams.typeId) {
         params = params.append('typeId', storeParams.typeId.toString());
       }
+
+      params = params.append('sort', storeParams.sort);
+
       return this.httpClient.get<IPagination<IProduct[]>>(this.baseUrl + 'Catalog/GetAllProducts', { params } );
     }
 
