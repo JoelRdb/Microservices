@@ -19,7 +19,10 @@ import { ServerErrorComponent } from './core/server-error/server-error.component
     NavbarComponent,
     StoreComponent,    
     HomeModule,
-    RouterOutlet
+    RouterOutlet,
+    NotFoundComponent,
+    UnAuthenticatedComponent,
+    ServerErrorComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
