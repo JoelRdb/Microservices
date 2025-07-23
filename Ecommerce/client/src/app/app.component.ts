@@ -10,6 +10,7 @@ import { HomeModule } from './home/home.module';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticated.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
+import { HeaderComponent } from './core/header/header.component';
 
 @Component({
   selector: 'app-root',
