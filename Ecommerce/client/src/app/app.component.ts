@@ -11,6 +11,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticated.component';
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { HeaderComponent } from './core/header/header.component';
+import { BreadcrumbComponent} from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,9 @@ import { HeaderComponent } from './core/header/header.component';
     RouterOutlet,
     NotFoundComponent,
     UnAuthenticatedComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    HeaderComponent,
+    BreadcrumbComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
