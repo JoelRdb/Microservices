@@ -1,32 +1,30 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor,
+  HttpInterceptorFn,
+  HttpErrorResponse,
+  HttpHandlerFn
+} from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
-/**
- *
- */
-@Injectable()
-export class ErrorInterceptor implements HttpInterceptor {
+
+
+export const errorInterceptorFn: HttpInterceptorFn = (request: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> => {
+
+  const router = new Router();
   
-  constructor(private router : Router) { }
-
-  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    return next.handle(req).pipe(
-      catchError((error) => {
+  return next(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('ERROR from interceptor (functional):', error);
         if(error){
-          if(error.status === 401) {
-            this.router.navigateByUrl('/unauthorized');
+          if(error.status === 404) { router.navigateByUrl('/not-found'); }
+          if(error.status === 401)  {router.navigateByUrl('/un-authenticated'); }
+          if(error.status === 500)  {router.navigateByUrl('/server-error'); } 
           }
-          if(error.status === 404) {
-            this.router.navigateByUrl('/not-found');
-          }
-          if(error.status === 500) {
-            this.router.navigateByUrl('/server-error');
-          }
-        }
-        return throwError(() => new Error(error));
+          return throwError(() => error);
       })
     );
-  }
-  } 
+  };

@@ -7,6 +7,9 @@ import { IPagination } from './shared/models/pagination';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { StoreComponent } from './store/store.component';
 import { HomeModule } from './home/home.module';
+import { NotFoundComponent } from './core/not-found/not-found.component';
+import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticated.component';
+import { ServerErrorComponent } from './core/server-error/server-error.component';
 
 @Component({
   selector: 'app-root',
