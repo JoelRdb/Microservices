@@ -29,7 +29,7 @@ export class ProductDetailsComponent implements OnInit {
       this.storeService.getProduct(id).subscribe({
         next: response => {
           this.product = response,
-          this.bcService.set('@productDetails', response.name); // Set the breadcrumb with the product name)
+          this.bcService.set('@productDetails', response.name); // Set the breadcrumb with the product name) 
         },
         error: error => console.error(error),
       });

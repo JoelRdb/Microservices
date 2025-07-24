@@ -11,6 +11,7 @@ import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticat
 import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { HeaderComponent } from './core/header/header.component';
 import { BreadcrumbComponent} from 'xng-breadcrumb';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ import { BreadcrumbComponent} from 'xng-breadcrumb';
     UnAuthenticatedComponent,
     ServerErrorComponent,
     HeaderComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    NgxSpinnerModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
