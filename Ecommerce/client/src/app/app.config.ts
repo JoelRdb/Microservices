@@ -3,8 +3,9 @@ import { provideRouter, RouterOutlet } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { errorInterceptorFn } from './core/interpceptors/error.interceptor';
+import { errorInterceptorFn } from './core/interceptors/error.interceptor';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(
       withFetch(),
-      withInterceptors([errorInterceptorFn])
+      withInterceptors([errorInterceptorFn, loadingInterceptor])
     ),    
   ]
 };
