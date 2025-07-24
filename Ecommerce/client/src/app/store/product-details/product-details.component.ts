@@ -4,6 +4,7 @@ import { StoreService } from '../store.service';
 import { ActivatedRoute } from '@angular/router';
 import { response } from 'express';
 import { CommonModule } from '@angular/common';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,8 @@ import { CommonModule } from '@angular/common';
 export class ProductDetailsComponent implements OnInit {
   product? : IProduct;
 
-  constructor(private storeService : StoreService, private activateRoute: ActivatedRoute) { 
+  constructor(private storeService : StoreService, private activateRoute: ActivatedRoute, private bcService: BreadcrumbService) {
+    // Set the breadcrumb for this component
 
   }
   ngOnInit(): void {
@@ -25,8 +27,11 @@ export class ProductDetailsComponent implements OnInit {
     const id = this.activateRoute.snapshot.paramMap.get('id');
     if(id){
       this.storeService.getProduct(id).subscribe({
-        next: response => this.product = response,
-        error: error => console.error(error)
+        next: response => {
+          this.product = response,
+          this.bcService.set('@productDetails', response.name); // Set the breadcrumb with the product name)
+        },
+        error: error => console.error(error),
       });
     }
   }
