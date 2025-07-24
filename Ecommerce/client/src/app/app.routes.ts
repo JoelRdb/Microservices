@@ -8,12 +8,11 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 
 
 export const routes: Routes = [
-    {path: '', component:HomeComponent},
+    {path: '', component:HomeComponent, data : {breadcrumb: 'Home'} },
     {path: 'un-authenticated', component: UnAuthenticatedComponent},
     {path: 'not-found', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},
-    {path: 'store', component:StoreComponent},
-    {path: 'store/:id', component:ProductDetailsComponent},
+    {path: 'store', loadChildren:()=>import('./store/store.module').then(mod=>mod.StoreModule), data:{breadcrumb:'Store'}},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 
 ];

@@ -5,7 +5,6 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { IProduct } from './shared/models/product';
 import { IPagination } from './shared/models/pagination';
 import { NavbarComponent } from './core/navbar/navbar.component';
-import { StoreComponent } from './store/store.component';
 import { HomeModule } from './home/home.module';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticated.component';
@@ -18,8 +17,7 @@ import { BreadcrumbComponent} from 'xng-breadcrumb';
   imports: [
     HttpClientModule,
     CommonModule,
-    NavbarComponent,
-    StoreComponent,    
+    NavbarComponent,    
     HomeModule,
     RouterOutlet,
     NotFoundComponent,
