@@ -6,11 +6,7 @@ import { IProduct } from './shared/models/product';
 import { IPagination } from './shared/models/pagination';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeModule } from './home/home.module';
-import { NotFoundComponent } from './core/not-found/not-found.component';
-import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticated.component';
-import { ServerErrorComponent } from './core/server-error/server-error.component';
 import { HeaderComponent } from './core/header/header.component';
-import { BreadcrumbComponent} from 'xng-breadcrumb';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @Component({
@@ -21,11 +17,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NavbarComponent,    
     HomeModule,
     RouterOutlet,
-    NotFoundComponent,
-    UnAuthenticatedComponent,
-    ServerErrorComponent,
     HeaderComponent,
-    BreadcrumbComponent,
     NgxSpinnerModule,
   ],
   templateUrl: './app.component.html',
