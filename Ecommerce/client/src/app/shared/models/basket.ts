@@ -1,5 +1,5 @@
 export interface IBasketItem{
-    productId: number;
+    productId: string;
     quantity: number;
     imageFile: string;
     productName: string;
