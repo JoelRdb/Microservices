@@ -53,7 +53,7 @@ export class BasketService {
   }
   createBasket(): Basket {
     const basket = new Basket();
-    localStorage.setItem('basket_username', 'joel'); //TODO: joel can be replaced with LoggedIn User
+    localStorage.setItem('basket_username', 'joel'); //TODO: joel can be replaced with LoggedIn User, we can see this in Inspection>Aoolicatin>Local storage
     return basket;
   } 
   addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
