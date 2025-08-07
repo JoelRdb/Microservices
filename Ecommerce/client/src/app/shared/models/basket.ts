@@ -18,3 +18,6 @@ export class Basket implements IBasket {
     totalPrice: number = 0;
 }
 
+export interface IBasketTotal{
+    total: number;
+}
