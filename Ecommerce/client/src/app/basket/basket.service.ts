@@ -13,8 +13,8 @@ export class BasketService {
 
   constructor(private http: HttpClient) { }
 
-  private basketSource = new BehaviorSubject<IBasket | null>(null); //stockage interne de la dernière valeur du panier(IBasket), garde en mémoire la dernière valeur émise.
-  basketSource$ = this.basketSource.asObservable(); // Version observable de basketSource, que le composants peuvent écouter pour etre notifiés quand le panier change.
+  private basketSource = new BehaviorSubject<Basket | null>(null); //stockage interne de la dernière valeur du panier(IBasket), garde en mémoire la dernière valeur émise.
+  basketSource$ = this.basketSource.asObservable(); // Version observable de basketSource, que le composants peuvent écouter pour etre notifiés quand le panier change :  Utiliser dans navbar.component pour l'affichage du nombre d'éléments d'un panier
 
 
   getBasket(username: string){
