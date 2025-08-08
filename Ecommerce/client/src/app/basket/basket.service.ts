@@ -39,7 +39,7 @@ export class BasketService {
   }
 
 
-
+  // Basket Operation start here
   addItemToBasket(item: IProduct, quantity = 1){
     const itemToAdd :IBasketItem = this.mapProductItemToBasketItem(item);
     const basket = this.getCurrentBasket() ?? this.createBasket();
@@ -83,4 +83,49 @@ export class BasketService {
     const total = basket.items.reduce((x, y)=> (y.price * y.quantity) + x, 0);
     this.basketTotal.next({total});
   }
+
+  incrementItemQuantity(item: IBasketItem){
+    const basket = this.getCurrentBasket();
+    if(!basket) return;
+    const foundItemIndex = basket.items.findIndex((x) => x.productId === item.productId);
+    basket.items[foundItemIndex].quantity++;
+    this.setBasket(basket);
+  }
+
+  decrementItemQuantity(item: IBasketItem){
+    const basket = this.getCurrentBasket();
+    if(!basket) return;
+    const foundItemIndex = basket.items.findIndex((x) => x.productId === item.productId);
+    if(basket.items[foundItemIndex].quantity > 1){
+      basket.items[foundItemIndex].quantity--;
+    }else{
+      this.removeItemFromBasket(item);
+    }
+  }
+  removeItemFromBasket(item: IBasketItem){
+    const basket = this.getCurrentBasket();
+    if(!basket) return;
+    if(basket.items.some((x) => x.productId === item.productId)){ // Vérifie si au moins un des éléments du panier possède l'Id 
+      basket.items = basket.items.filter((x) => x.productId!== item.productId) // Exclure l'élément de notre panier
+      if(basket.items.length > 0){ // S'il y a encore d'élement(s) dans le panier, alors mettre  à jour  le panier 
+        this.setBasket(basket);
+      }else{ // Si aucun élément dans le panier, alors supprimer définitivement le panier
+        this.deleteBasket(basket.userName);
+      }
+    }
+  }
+  deleteBasket(userName: string) {
+    return this.http.delete(this.baseUrl + 'Basket/DeleteBasket' + userName).subscribe({
+      next: (response) => {
+        this.basketSource.next(null);
+        this.basketTotal.next(null);
+        localStorage.removeItem('basket_username');
+      }, error: (err) => {
+        console.log('Error Occured while deletin basket');
+        console.log(err);
+      }
+    })
+  }
+  // Basket Operation end here
 }
+

@@ -16,6 +16,6 @@ import { OrderSummaryComponent } from '../shared/order-summary/order-summary.com
 })
 export class BasketComponent {
 
-  constructor(public basketService: BasketService) {
-  }
+constructor(public basketService: BasketService) {
+}
 }
