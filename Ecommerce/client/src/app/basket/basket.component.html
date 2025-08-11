@@ -45,9 +45,9 @@
                                 <td class="align-middle"><strong>{{item.price | currency:'Ar '}}</strong></td>
                                 <td class="align-middle">
                                     <div class="d-flex align-items center">
-                                        <i class="fa fa-minus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
+                                        <i (click)="decrementItem(item)" class="fa fa-minus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
                                             <span class="font-weight-bold" style="font-size: 1.5em;">{{item.quantity}}</span>
-                                        <i class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
+                                        <i (click)="incrementItem(item)" class="fa fa-plus-circle text-warning mx-2" style="cursor: pointer; font-size: 2em;"></i>
                                     </div>
                                 </td>
                                 <td class="align-middle">
@@ -55,7 +55,7 @@
                                 </td>
                                 <td class="align-middle text-center">
                                     <a class="text-danger">
-                                        <i class="fa fa-trash" aria-hidden="true" style="cursor: pointer; font-size: 2em;"></i>
+                                        <i (click)="removeItemFromBasket(item)" class="fa fa-trash" aria-hidden="true" style="cursor: pointer; font-size: 2em;"></i>
                                     </a>
                                 </td>
                             </tr>

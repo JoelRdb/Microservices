@@ -14,12 +14,8 @@ export class NavbarComponent  {
 
   constructor(public basketService : BasketService) {}
 
-
   getBasketCount(items: IBasketItem[]){
     return items.reduce((sum, items)=>sum + items.quantity, 0)
   }
-
-  
-
 
 }
