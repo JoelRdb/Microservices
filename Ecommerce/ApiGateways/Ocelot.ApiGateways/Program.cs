@@ -41,7 +41,7 @@ var authScheme = "ECommerceGatewayAuthScheme";
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(authScheme, options =>
     {
-        options.Authority = "http://localhost:9009"; //permet à Ocelot de se connecter à identity server
+        options.Authority = "https://localhost:9009"; //permet à Ocelot de se connecter à identity server
         options.Audience = "ECommerceGateway";
     });
 

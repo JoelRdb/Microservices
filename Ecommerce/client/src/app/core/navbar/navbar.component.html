@@ -13,7 +13,7 @@
     </nav>
     <div class="d-flex align-center">  
       <a [routerLink]="['/basket']" class="position-relative">
-        <i class="fa fa-shopping-cart fa-2x mr-4 text-dark"></i>
+        <i class="fa fa-shopping-cart fa-2x me-4 text-dark"></i>
         <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">{{ getBasketCount(basket.items) }}</div>
       </a>
       <a [routerLink]="['/account/login']"  class="btn btn-outline-secondary me-2">Login</a>
