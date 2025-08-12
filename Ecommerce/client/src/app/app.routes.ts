@@ -7,6 +7,7 @@ import { UnAuthenticatedComponent } from './core/un-authenticated/un-authenticat
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { SigninRedirectCallbackComponent } from './account/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './account/signout-redirect-callback/signout-redirect-callback.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 export const routes: Routes = [
@@ -19,5 +20,6 @@ export const routes: Routes = [
     {path: 'store', loadChildren:()=>import('./store/store.module').then(mod=>mod.StoreModule), data:{breadcrumb:'Store'}},
     {path: 'basket', loadChildren:()=>import('./basket/basket.module').then(mod=>mod.BasketModule), data:{breadcrumb:'Basket'}},
     {path: 'account', loadChildren:()=>import('./account/account.module').then(mod=> mod.AccountModule), data:{breadcrumb: {skip:true}}},
+    {path: 'checkout', canActivate:[AuthGuard], loadChildren:() => import('./checkout/checkout.module').then(mod => mod.CheckoutModule), data:{breadcrumb: 'Checkout'}},
     {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
