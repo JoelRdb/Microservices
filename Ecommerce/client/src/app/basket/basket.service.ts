@@ -98,6 +98,7 @@ export class BasketService {
     const foundItemIndex = basket.items.findIndex((x) => x.productId === item.productId);
     if(basket.items[foundItemIndex].quantity > 1){
       basket.items[foundItemIndex].quantity--;
+      this.setBasket(basket);
     }else{
       this.removeItemFromBasket(item);
     }
@@ -115,7 +116,7 @@ export class BasketService {
     }
   }
   deleteBasket(userName: string) {
-    return this.http.delete(this.baseUrl + 'Basket/DeleteBasket' + userName).subscribe({
+    return this.http.delete(this.baseUrl + 'Basket/DeleteBasket/' + userName).subscribe({
       next: (response) => {
         this.basketSource.next(null);
         this.basketTotal.next(null);
