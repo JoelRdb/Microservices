@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.IdentityModel.Tokens;
 using Serilog.Filters;
 using static Duende.IdentityServer.Events.TokenIssuedSuccessEvent;
+using Duende.IdentityServer;
 
 namespace Ecommerce.Identity;
 
@@ -24,8 +25,8 @@ public static class Config
         {
             new ApiScope("catalogapi"),
             new ApiScope("basketapi"),
-            new ApiScope("discountapi"),
-            new ApiScope("orderingapi"),
+            //new ApiScope("discountapi"),
+            //new ApiScope("orderingapi"),
             new ApiScope("catalogapi.read"),
             new ApiScope("catalogapi.write"),
             new ApiScope("ecommercegateway"),
@@ -43,17 +44,21 @@ public static class Config
             {
                 Scopes = {"basketapi"}
             },
-            new ApiResource("Discount", "Discount.API")
-            {
-                Scopes = { "discountapi" }
-            },
-            new ApiResource("Ordering", "Ordering.API")
-            {
-                Scopes = { "orderingapi" }
-            },
+            //new ApiResource("Discount", "Discount.API")
+            //{
+            //    Scopes = { "discountapi" }
+            //},
+            //new ApiResource("Ordering", "Ordering.API")
+            //{
+            //    Scopes = { "orderingapi" }
+            //},
             new ApiResource("ECommerceGateway", "ECommerce Gateway")
             {
                 Scopes = { "ecommercegateway" }
+            },
+            new ApiResource("ecommerceAngular", "EShopping Angular")
+            {
+                Scopes = { "ecommercegateway", "catalogapi.read", "catalogapi.write", "basketapi" }
             }
         };
     public static IEnumerable<Client> Clients =>
@@ -92,6 +97,46 @@ public static class Config
                 ClientSecrets = {new Secret("3c6nb3b5-4667-az57-2b4691ed21n0".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials, //C’est le flow OAuth2 qui permet à une application autonome de demander un token d’accès à IdentityServer.
                 AllowedScopes = { "ecommercegateway", "catalogapi", "basketapi", "discountapi", "orderingapi" }
+            },
+            new Client
+            {
+                ClientName = "Angular-Client",
+                ClientId = "angular-client",
+                AllowedGrantTypes = GrantTypes.Code,
+
+                RedirectUris = new List<string>
+                {
+                    "http://localhost:4200/signin-callback",
+                    "http://localhost:4200/assets/silent-callback.html",
+                    "https://localhost:9009/signin-oidc"
+                },
+                RequirePkce = true,
+                AllowAccessTokensViaBrowser = true,
+                Enabled = true,
+                UpdateAccessTokenClaimsOnRefresh = true,
+
+                AllowedScopes =
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "ecommercegateway"
+                },
+                AllowedCorsOrigins = { "http://localhost:4200"  },
+                RequireClientSecret = false,
+                AllowRememberConsent = false,
+                //PostLogoutRedicrectUis = new List<string> {"http://localhost:4200/signout-callback"},
+                RequireConsent = false,
+                AccessTokenLifetime = 3600,
+                PostLogoutRedirectUris = new List<string>
+                {
+                    "http://localhost:4200/signout-callback",
+                    "https://localhost:9009/signout-callback-oidc"
+                },
+                ClientSecrets = new List<Secret>
+                {
+                    new Secret("3a0nb1b4-4677-ax57-2u4691ed21n1".Sha256())
+                }
             }
+
          };
 }

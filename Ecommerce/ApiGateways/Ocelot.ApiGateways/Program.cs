@@ -38,10 +38,16 @@ var authScheme = "ECommerceGatewayAuthScheme";
 //            ValidateIssuerSigningKey = true // Indique que la clé de signature doit être validée
 //        };
 //    });
-
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(authScheme, options =>
+    {
+        options.Authority = "http://localhost:9009"; //permet à Ocelot de se connecter à identity server
+        options.Audience = "ECommerceGateway";
+    });
 
 builder.Services.AddOcelot(builder.Configuration)
     .AddCacheManager(o => o.WithDictionaryHandle());
+
 
 builder.Services.AddScoped<ICorrelationIDGenerator, CorrelationIDGenerator>();
 
