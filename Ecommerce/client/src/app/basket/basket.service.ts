@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Basket, IBasket, IBasketItem, IBasketTotal } from '../shared/models/basket';
 import { BehaviorSubject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
+import { AccountService } from '../account/account.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class BasketService {
 
   baseUrl = 'https://localhost:8010/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private acntService: AccountService, private router: Router) { }
 
   private basketSource = new BehaviorSubject<Basket | null>(null); //stockage interne de la dernière valeur du panier(IBasket), garde en mémoire la dernière valeur émise.
   basketSource$ = this.basketSource.asObservable(); // Version observable de basketSource, que le composants peuvent écouter pour etre notifiés quand le panier change :  Utiliser dans navbar.component pour l'affichage du nombre d'éléments d'un panier
@@ -38,6 +40,21 @@ export class BasketService {
     });
   }
 
+
+  checkoutBasket(basket: IBasket){
+    const httpOptions = {
+      headers: new HttpHeaders ({
+        'Content-Type': 'application/json',
+        'Authorization': this.acntService.authorizationHeaderValue
+      })
+    };
+    return this.http.post<IBasket>(this.baseUrl + 'Basket/CheckoutV2', basket, httpOptions).subscribe({
+      next: basket => {
+        this.basketSource.next(null);
+        this.router.navigateByUrl('/');
+      }
+    })
+  }
 
   // Basket Operation start here
   addItemToBasket(item: IProduct, quantity = 1){

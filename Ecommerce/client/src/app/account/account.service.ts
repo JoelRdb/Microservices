@@ -45,7 +45,7 @@ export class AccountService {
 get authorizationHeaderValue() : string {
   console.log(this.token);
   console.log(this.access_token);
-  return '${this.token} $ {this.access_token}';
+  return '${this.token} ${this.access_token}';
 }
 
   logout()
