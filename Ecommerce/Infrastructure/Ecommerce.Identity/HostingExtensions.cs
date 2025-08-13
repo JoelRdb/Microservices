@@ -12,6 +12,8 @@ internal static class HostingExtensions
     {
         builder.Services.AddRazorPages();
 
+        builder.Services.AddSession(options => options.Cookie.SameSite = SameSiteMode.None);
+
         var isBuilder = builder.Services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;

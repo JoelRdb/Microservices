@@ -16,7 +16,7 @@ export const routes: Routes = [
     {path: 'not-found', component: NotFoundComponent},
     {path: 'server-error', component: ServerErrorComponent},
     {path: 'signin-callback', component: SigninRedirectCallbackComponent},
-    {path: 'signout-callbaack', component: SignoutRedirectCallbackComponent},
+    {path: 'signout-callback', component: SignoutRedirectCallbackComponent},
     {path: 'store', loadChildren:()=>import('./store/store.module').then(mod=>mod.StoreModule), data:{breadcrumb:'Store'}},
     {path: 'basket', loadChildren:()=>import('./basket/basket.module').then(mod=>mod.BasketModule), data:{breadcrumb:'Basket'}},
     {path: 'account', loadChildren:()=>import('./account/account.module').then(mod=> mod.AccountModule), data:{breadcrumb: {skip:true}}},
