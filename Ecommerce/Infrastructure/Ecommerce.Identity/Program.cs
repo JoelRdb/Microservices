@@ -19,7 +19,17 @@ try
     var app = builder
         .ConfigureServices()
         .ConfigurePipeline();
-    
+
+    if (app.Environment.IsDevelopment())
+    {
+        app.Use(async (context, next) =>
+        {
+            context.Response.Headers.Add("Content-Security-Policy", "default-src 'self'; connect-src 'self' wss://localhost:44332");
+            await next();
+        });
+    }
+
+
     app.Run();
 }
 catch (Exception ex)

@@ -8,6 +8,7 @@ import { OrderSummaryComponent } from '../shared/order-summary/order-summary.com
 
 @Component({
   selector: 'app-checkout',
+  standalone : true,
   imports: [
     CommonModule,
     CheckoutRoutingModule, 
@@ -27,7 +28,7 @@ export class CheckoutComponent implements OnInit {
     this.acntService.currentUser$.subscribe({
       next: (res) => {
         this.isUserAuthenticated = res;
-        console.log(this.isUserAuthenticated);
+        console.log('Utilisateur authentifié', this.isUserAuthenticated);
       }, error:(err) => {
         console.log(`An error occured while setting isUserAuthenticated flag.`);
       }

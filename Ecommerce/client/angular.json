@@ -38,7 +38,7 @@
               "./node_modules/ngx-spinner/animations/ball-pulse-sync.css",
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": ["./node_modules/oidc-client/lib/oidc-client.min.js"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -103,7 +103,7 @@
               "src/styles.scss",
               "./node_modules/ngx-spinner/animations/ball-pulse-sync.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/oidc-client/lib/oidc-client.min.js"]
           }
         }
       }

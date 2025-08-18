@@ -16,6 +16,6 @@
         <i class="fa fa-shopping-cart fa-2x me-4 text-dark"></i>
         <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">{{ getBasketCount(basket.items) }}</div>
       </a>
-      <a [routerLink]="['/account/login']"  class="btn btn-outline-secondary me-2">Login</a>
-      <a [routerLink]="['/account/register']" class="btn btn-outline-secondary me-3">Sign up</a>
+      <a *ngIf="!isUserAuthenticated" (click)="login()" class="btn btn-link" style="color: gray;">Login</a>
+      <a *ngIf="isUserAuthenticated" (click)="logout()" class="btn btn-link" style="color: gray;">Logout</a>
     </div>

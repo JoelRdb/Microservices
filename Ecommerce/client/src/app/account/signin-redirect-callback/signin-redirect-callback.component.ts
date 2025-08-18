@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../account.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { error } from 'console';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signin-redirect-callback',
-  imports: [],
+  imports: [CommonModule],
   template: '<div></div>'
   })
 export class SigninRedirectCallbackComponent implements OnInit {
@@ -14,9 +16,14 @@ export class SigninRedirectCallbackComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.actService.finishLogin().then(_ => {
-        console.log('inside finish login');
-        this._router.navigate(['/checkout'], {replaceUrl: true});
+      this.actService.finishLogin()
+      .then(_ => {
+        if(_){ // user connected
+          this._router.navigate(['/checkout'], {replaceUrl: true});
+          console.log('user connected', _);
+        }else{ 
+          console.log('user not connected');
+        }
       })
     }
 }
