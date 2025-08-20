@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-api
-          image: joelrdb/catalog-api:latest
+          image: joelrdb/catalogapi:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80
@@ -27,7 +27,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mongo-configmap
-                  key: connection-string
+                  key: connection_string
             - name: DatabaseSettings__DatabaseName
               valueFrom:
                 configMapKeyRef:
