@@ -38,11 +38,16 @@ spec:
                 configMapKeyRef:
                   name: mongo-configmap
                   key: CollectionName
-            - name: ElasticConfiguration__Uri
+            - name: DatabaseSettings__TypesCollection
               valueFrom:
                 configMapKeyRef:
                   name: mongo-configmap
-                  key: ElasticSetting
+                  key: Types
+            - name: DatabaseSettings__BrandsCollection
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: Brands
           resources:
             limits:
               memory: "128Mi"
