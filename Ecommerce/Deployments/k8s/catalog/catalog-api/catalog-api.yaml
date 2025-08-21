@@ -23,11 +23,13 @@ spec:
           env:
             - name: ASPNETCORE_ENVIRONMENT
               value: Development
+            - name :  ASPNETCORE_URLS
+              value: "http://+:80"
             - name: DatabaseSettings__ConnectionStrings
               valueFrom:
                 configMapKeyRef:
                   name: mongo-configmap
-                  key: connection_string
+                  key: ConnectionStrings
             - name: DatabaseSettings__DatabaseName
               valueFrom:
                 configMapKeyRef:
@@ -42,12 +44,12 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mongo-configmap
-                  key: Types
+                  key: TypesCollection
             - name: DatabaseSettings__BrandsCollection
               valueFrom:
                 configMapKeyRef:
                   name: mongo-configmap
-                  key: Brands
+                  key: BrandsCollection
           resources:
             limits:
               memory: "128Mi"
