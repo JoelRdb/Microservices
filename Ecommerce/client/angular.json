@@ -40,6 +40,7 @@
             ],
             "scripts": ["./node_modules/oidc-client/lib/oidc-client.min.js"],
             "server": "src/main.server.ts",
+            "prerender": false,
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
@@ -49,7 +50,7 @@
             "production": {
               "budgets": [
                 {
-                  "type": "initial",
+                  "type": "initial",  
                   "maximumWarning": "2MB",
                   "maximumError": "3MB"
                 },
