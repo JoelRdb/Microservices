@@ -19,8 +19,7 @@ const routes: Routes = [
     path: ':id', // This path is relative to '/store' (so it matches /store/:id)
     component: ProductDetailsComponent,
     data: { 
-      breadcrumb: {alias: 'productDetails'},
-      prerender : false 
+      breadcrumb: {alias: 'productDetails'}     
     }, // 'productDetails' is the same name as used in the breadcrumb service
   },
   {
