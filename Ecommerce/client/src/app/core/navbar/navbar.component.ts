@@ -14,19 +14,20 @@ import { AccountService } from '../../account/account.service';
 export class NavbarComponent implements OnInit  {
   
   public isUserAuthenticated: boolean = false;
+  public userName : string = '';
 
-  constructor(public basketService : BasketService, private acntService : AccountService) {}
+  constructor(public basketService : BasketService, private acntService : AccountService) {
+
+  }
 
   ngOnInit(): void {
     console.log('current user');
-    this.acntService.currentUser$.subscribe({
-      next:(res) => {
-        this.isUserAuthenticated = res;
-        console.log(this.isUserAuthenticated);
-      },error: (err) => {
-        console.log('An error occured while setting isUserAuthenticated flag');
-        }
-    })
+    this.acntService.currentUser$.subscribe(user => {
+      this.isUserAuthenticated = !!user && !user.expired;
+      this.userName = user?.profile.Username || user?.profile.given_name || '';
+      console.log('Username: ' + this.userName);
+    });
+
   }
 
   getBasketCount(items: IBasketItem[]){

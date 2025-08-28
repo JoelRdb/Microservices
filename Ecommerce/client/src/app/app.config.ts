@@ -8,6 +8,8 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideOAuthClient } from 'angular-oauth2-oidc';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +21,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([errorInterceptorFn, loadingInterceptor])
     ),    
     provideAnimations(),
-    importProvidersFrom(NgxSpinnerModule) // Import NgxSpinnerModule to use it in the app
+    importProvidersFrom(NgxSpinnerModule), // Import NgxSpinnerModule to use it in the app
+    provideOAuthClient()
   ]
 };

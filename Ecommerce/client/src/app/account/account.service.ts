@@ -28,11 +28,12 @@ export class AccountService {
         this.manager = new UserManager(getClientSettings());
         this.manager.getUser().then(user => {
             this.user = user,
-            this.currentUserSource.next(this.isAuthenticated());
+            this.currentUserSource.next(user);
         });
     }
   }
   
+
   // 2. Mettre à jour les autres méthodes pour vérifier le manager
   private getUserManager(): UserManager {
     if (!this.manager) {
@@ -75,6 +76,7 @@ export class AccountService {
       this.currentUserSource.next(this.checkUser(user));
       this.token = user.token_type;
       this.access_token = user.access_token;
+      this.currentUserSource.next(user);
       return user;
     })
   }

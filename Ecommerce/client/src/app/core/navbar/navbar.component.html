@@ -18,4 +18,16 @@
       </a>
       <a *ngIf="!isUserAuthenticated" (click)="login()" class="btn btn-link" style="color: gray;">Login</a>
       <a *ngIf="isUserAuthenticated" (click)="logout()" class="btn btn-link" style="color: gray;">Logout</a>
+      <!-- <a *ngIf="isUserAuthenticated" class="btn btn-link" style="color: rgb(194, 3, 3);">{{ userName }}</a>       -->
+
+       <div class="dropdown">
+        <button *ngIf="isUserAuthenticated" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ userName }}
+        </button>
+        <ul class="dropdown-menu">
+          <li><a *ngIf="isUserAuthenticated" (click)="logout()" class="dropdown-item" href="#">Logout</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
     </div>
