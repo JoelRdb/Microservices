@@ -4,6 +4,7 @@ using Catalog.Application.Responses;
 using Catalog.Core.Specs;
 using Common.Logging.Correlation;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -27,6 +28,7 @@ namespace Catalog.API.Controllers
 
         [HttpGet]
         [Route("[action]/{id}", Name = "GetProductById")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ProductResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<ActionResult<ProductResponse>> GetProductById(string id)
@@ -49,6 +51,7 @@ namespace Catalog.API.Controllers
 
         [HttpGet]
         [Route("GetAllProducts")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(Pagination<ProductResponse>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IList<ProductResponse>>> GetAllProducts([FromQuery]CatalogSpecsParams catalogSpecsParams)
         {
@@ -61,6 +64,7 @@ namespace Catalog.API.Controllers
 
         [HttpGet]
         [Route("GetAllBrands")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(IList<BrandResponse>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<BrandResponse>> GetAllBrands()
         {
@@ -72,6 +76,7 @@ namespace Catalog.API.Controllers
 
         [HttpGet]
         [Route("GetAllTypes")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(IList<TypesResponse>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<TypesResponse>> GetAllTypes()
         {

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog.Filters;
 using static Duende.IdentityServer.Events.TokenIssuedSuccessEvent;
 using Duende.IdentityServer;
+using static System.Net.WebRequestMethods;
 
 namespace Ecommerce.Identity;
 
@@ -30,6 +31,7 @@ public static class Config
             new ApiScope("catalogapi.read"),
             new ApiScope("catalogapi.write"),
             new ApiScope("ecommercegateway"),
+            new ApiScope("ecommerceangular"),
         };
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
@@ -58,7 +60,7 @@ public static class Config
             },
             new ApiResource("ecommerceAngular", "EShopping Angular")
             {
-                Scopes = { "ecommercegateway", "catalogapi.read", "catalogapi.write", "basketapi" }
+                Scopes = { "ecommerceangular", "catalogapi.read", "catalogapi.write", "basketapi" }
             }
         };
     public static IEnumerable<Client> Clients =>
@@ -102,13 +104,15 @@ public static class Config
             {
                 ClientName = "Angular-Client",
                 ClientId = "angular-client",
-                AllowedGrantTypes = GrantTypes.Code,
+                AllowedGrantTypes = GrantTypes.Code, // OIDC avec PKCE (recommandé pour Angular)
 
                 RedirectUris = new List<string>
                 {
                     "http://localhost:4200/signin-callback",
                     "http://localhost:4200/silent-callback.html",
-                    "https://localhost:9009/signin-oidc"
+                    //"https://localhost:9009/signin-oidc",
+                    "https://id-local.eshopping.com:44344/signin-oidc",
+                    "https://id-local.eshopping.com:44344/signin-callback",
                 },
                 RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,
@@ -119,10 +123,10 @@ public static class Config
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
-                    "ecommercegateway"
+                    "ecommerceangular"
                 },
                 AllowedCorsOrigins = { "http://localhost:4200"  },
-                RequireClientSecret = false,
+                RequireClientSecret = false,  // Car Angular est une SPA publique
                 AllowRememberConsent = false,
                 //PostLogoutRedicrectUis = new List<string> {"http://localhost:4200/signout-callback"},
                 RequireConsent = false,
@@ -130,13 +134,13 @@ public static class Config
                 PostLogoutRedirectUris = new List<string>
                 {
                     "http://localhost:4200/signout-callback",
-                    "https://localhost:9009/signout-callback-oidc"
+                    //"https://localhost:9009/signout-callback-oidc",
+                    "https://id-local.eshopping.com:44344/signout-callback-oidc"
                 },
                 ClientSecrets = new List<Secret>
                 {
                     new Secret("3a0nb1b4-4677-ax57-2u4691ed21n1".Sha256())
                 }
             }
-
          };
 }

@@ -11,7 +11,8 @@ import { Router } from '@angular/router';
 })
 export class BasketService {
 
-  baseUrl = 'https://localhost:8010/';
+  // baseUrl = 'https://localhost:8010/';
+  baseUrl = 'https://id-local.eshopping.com:44344/';
 
   constructor(private http: HttpClient, private acntService: AccountService, private router: Router) { }
 

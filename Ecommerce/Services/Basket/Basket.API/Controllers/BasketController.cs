@@ -8,6 +8,7 @@ using Common.Logging.Correlation;
 using EventBus.Messages.Common;
 using MassTransit;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -37,6 +38,7 @@ namespace Basket.API.Controllers
         /// <returns>Le panier</returns>
         [HttpGet]
         [Route("[action]/{userName}", Name="GetBasketByUserName")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ShoppingCartResponse), (int) HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCartResponse>> GetBasket(string userName)
         {
@@ -47,6 +49,7 @@ namespace Basket.API.Controllers
 
 
         [HttpPost("CreateBasket")]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ShoppingCartResponse), (int) HttpStatusCode.OK)]
         public async Task<ActionResult<ShoppingCartResponse>> UpdateBasket([FromBody] CreateShoppingCartCommand createShoppingCartCommand)
         {            

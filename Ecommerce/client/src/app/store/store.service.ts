@@ -13,10 +13,11 @@ export class StoreService {
 
   constructor(private httpClient : HttpClient) { }
 
-    baseUrl = 'https://localhost:8010/';
+    // baseUrl = 'https://localhost:8010/';
+    baseUrl = 'https://id-local.eshopping.com:44344/';
 
     getProduct(id: string){
-      return this.httpClient.get<IProduct>(this.baseUrl + 'Catalog/GetProductById/' + id);
+      return this.httpClient.get<IProduct>(this.baseUrl + 'catalog/GetProductById/' + id);
     }
     
     getProducts(storeParams: StoreParams) {

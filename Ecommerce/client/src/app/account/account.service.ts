@@ -60,7 +60,7 @@ export class AccountService {
   get authorizationHeaderValue(): string {
     console.log(this.token);
     console.log(this.access_token);
-    return '${this.token} ${this.access_token}';
+    return `${this.token} ${this.access_token}`;
   }
 
   logout() {
@@ -101,7 +101,7 @@ export function getClientSettings(): UserManagerSettings {
     authority: Constants.idpAuthority,
     client_id: Constants.clientId,
     redirect_uri: `${Constants.clientRoot}/signin-callback`,
-    scope: "openid profile ecommercegateway",
+    scope: "openid profile ecommerceangular",
     response_type: "code",
     post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`
   };

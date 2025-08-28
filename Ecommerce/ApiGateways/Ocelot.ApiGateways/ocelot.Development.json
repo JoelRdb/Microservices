@@ -7,7 +7,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ], // Le client fait appel
       "UpstreamPathTemplate": "/Catalog",
@@ -20,7 +20,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductById/{id}",
@@ -32,7 +32,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductByProductName/{productName}",
@@ -44,7 +44,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllProducts",
@@ -56,7 +56,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllBrands",
@@ -68,7 +68,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetAllTypes",
@@ -80,7 +80,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Catalog/GetProductByBrandName/{brand}",
@@ -93,7 +93,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Basket/GetBasket/{userName}",
@@ -105,7 +105,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Basket/DeleteBasket/{userName}",
@@ -117,7 +117,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Basket",
@@ -129,14 +129,14 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Basket/CreateBasket",
-      "UpstreamHttpMethod": [ "POST" ],
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "ECommerceGatewayAuthScheme"
-      }
+      "UpstreamHttpMethod": [ "POST" ]
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ECommerceGatewayAuthScheme"
+      //}
     },
     {
       "DownstreamPathTemplate": "/api/v1/Basket/Checkout",
@@ -144,7 +144,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ], // Si un client envoie plus d’une requête POST sur /Basket/Checkout en moins de 3 secondes,
       //il recevra une erreur HTTP 429 (Too Many Requests). Exmple : 
@@ -170,7 +170,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Basket/CheckoutV2",
@@ -215,7 +215,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "ordering.api",
-          "Port": "8003"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Order/{userName}",
@@ -227,7 +227,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "ordering.api",
-          "Port": "8003"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/Order/DeleteOrder/{id}",
@@ -241,7 +241,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ], // Le client fait appel
       "UpstreamPathTemplate": "/api/v1/Catalog",
@@ -254,7 +254,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetProductById/{id}",
@@ -266,7 +266,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetProductByProductName/{productName}",
@@ -278,7 +278,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetAllProducts",
@@ -290,7 +290,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetAllBrands",
@@ -302,7 +302,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetAllTypes",
@@ -314,7 +314,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "catalog.api",
-          "Port": "8000"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Catalog/GetProductByBrandName/{brand}",
@@ -327,7 +327,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Basket/GetBasket/{userName}",
@@ -339,7 +339,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Basket/DeleteBasket/{userName}",
@@ -351,7 +351,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Basket",
@@ -363,7 +363,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Basket/CreateBasket",
@@ -378,7 +378,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ], // Si un client envoie plus d’une requête POST sur /Basket/Checkout en moins de 3 secondes,
       //il recevra une erreur HTTP 429 (Too Many Requests). Exmple : 
@@ -404,7 +404,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "basket.api",
-          "Port": "8001"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v2/Basket/CheckoutV2",
@@ -449,7 +449,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "ordering.api",
-          "Port": "8003"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Order/{userName}",
@@ -461,7 +461,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "ordering.api",
-          "Port": "8003"
+          "Port": "8080"
         }
       ],
       "UpstreamPathTemplate": "/api/v1/Order/DeleteOrder/{id}",

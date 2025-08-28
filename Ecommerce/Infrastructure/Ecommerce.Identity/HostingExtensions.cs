@@ -22,6 +22,7 @@ internal static class HostingExtensions
                 options.Events.RaiseSuccessEvents = true;
 
                 // see https://docs.duendesoftware.com/identityserver/v6/fundamentals/resources/
+                options.IssuerUri = "https://id-local.eshopping.com:44344";
                 options.EmitStaticAudienceClaim = true;
             })
             .AddTestUsers(TestUsers.Users);
