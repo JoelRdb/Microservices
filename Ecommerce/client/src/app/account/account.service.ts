@@ -103,7 +103,7 @@ export function getClientSettings(): UserManagerSettings {
     authority: Constants.idpAuthority,
     client_id: Constants.clientId,
     redirect_uri: `${Constants.clientRoot}/signin-callback`,
-    scope: "openid profile ecommerceangular",
+    scope: "openid profile ecommerceangular roles",
     response_type: "code",
     post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`
   };

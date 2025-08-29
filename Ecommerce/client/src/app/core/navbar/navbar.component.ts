@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit  {
   
   public isUserAuthenticated: boolean = false;
   public userName : string = '';
+  public isAdmin: boolean = false;
 
   constructor(public basketService : BasketService, private acntService : AccountService) {
 
@@ -25,7 +26,9 @@ export class NavbarComponent implements OnInit  {
     this.acntService.currentUser$.subscribe(user => {
       this.isUserAuthenticated = !!user && !user.expired;
       this.userName = user?.profile.Username || user?.profile.given_name || '';
+      this.isAdmin = user?.profile.role === 'admin' ? true : false;
       console.log('Username: ' + this.userName);
+      console.log('isAdmin: ' + this.isAdmin + " \n user.profile.role: " + user?.profile.role);
     });
 
   }

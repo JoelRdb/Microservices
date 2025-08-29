@@ -26,8 +26,8 @@
         </button>
         <ul class="dropdown-menu">
           <li><a *ngIf="isUserAuthenticated" (click)="logout()" class="dropdown-item" href="#">Logout</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+          <li *ngIf="isAdmin"><a class="dropdown-item" href="#">Another action</a></li>
+          <li *ngIf="isAdmin"><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div>
     </div>

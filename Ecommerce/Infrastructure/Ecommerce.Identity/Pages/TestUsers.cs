@@ -33,7 +33,8 @@ public static class TestUsers
                     Claims = new List<Claim>
                     {
                         new Claim(JwtClaimTypes.GivenName, "joel"),
-                        new Claim(JwtClaimTypes.FamilyName, "randriambao")
+                        new Claim(JwtClaimTypes.FamilyName, "randriambao"),
+                        new Claim(JwtClaimTypes.Role, "admin")
                     }
                 },
                 new TestUser

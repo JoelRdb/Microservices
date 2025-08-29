@@ -8,6 +8,7 @@ using Serilog.Filters;
 using static Duende.IdentityServer.Events.TokenIssuedSuccessEvent;
 using Duende.IdentityServer;
 using static System.Net.WebRequestMethods;
+using Duende.IdentityModel;
 
 namespace Ecommerce.Identity;
 
@@ -18,6 +19,7 @@ public static class Config
         {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+            new IdentityResource("roles", new [] { JwtClaimTypes.Role })
         };
 
     public static IEnumerable<ApiScope> ApiScopes =>
@@ -123,7 +125,8 @@ public static class Config
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
-                    "ecommerceangular"
+                    "ecommerceangular",
+                    "roles"
                 },
                 AllowedCorsOrigins = { "http://localhost:4200"  },
                 RequireClientSecret = false,  // Car Angular est une SPA publique
@@ -140,7 +143,8 @@ public static class Config
                 ClientSecrets = new List<Secret>
                 {
                     new Secret("3a0nb1b4-4677-ax57-2u4691ed21n1".Sha256())
-                }
+                },
+                AlwaysIncludeUserClaimsInIdToken = true
             }
          };
 }
