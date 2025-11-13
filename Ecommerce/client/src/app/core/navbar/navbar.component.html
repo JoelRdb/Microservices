@@ -26,7 +26,9 @@
         </button>
         <ul class="dropdown-menu">
           <li><a *ngIf="isUserAuthenticated" (click)="logout()" class="dropdown-item" href="#">Logout</a></li>
-          <li *ngIf="isAdmin"><a class="dropdown-item" href="#">Another action</a></li>
+          <li *ngIf="isAdmin">
+            <a class="dropdown-item" routerLink="/myorder" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">My order</a>
+          </li>
           <li *ngIf="isAdmin"><a class="dropdown-item" href="#">Something else here</a></li>
         </ul>
       </div>
