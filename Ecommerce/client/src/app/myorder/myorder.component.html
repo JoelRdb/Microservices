@@ -1,11 +1,11 @@
 <div class="container mt-2">
     <ng-container>
         <div class="container">
-            <div class="row">
-                <div class="table-responsive">
+            <div class="row col-12">
+                <div class="table-responsive col-4">
                     <table class="table">
                         <thead>
-                            <tr>
+                            <tr class="horizontal-scroll">
                                 <th class="border-0 bg-light" crope="col">
                                     <div class="p6-2 px-3 text-uppercase">ID</div>
                                 </th>
@@ -18,19 +18,65 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <tr *ngFor="let order of listOrder$ | async">
+                                <td> {{ order.id }} </td>
+                                <td> {{ order.userName }} </td>
+                                <td> {{ order.totalPrice }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-responsive col-8">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="border-0 bg-light" scope="col">
+                                    <div class="p-2 px-3 text-uppercase">Product</div>
+                                </th>                                
+                          
+                                <th class="border-0 bg-light" scope="col">
+                                    <div class="p-2 px-3 text-uppercase">Price</div>
+                                </th>                                
+                          
+                                <th class="border-0 bg-light" scope="col">
+                                    <div class="p-2 px-3 text-uppercase">Quantity</div>
+                                </th>                                
+                           
+                                <th class="border-0 bg-light" scope="col">
+                                    <div class="p-2 px-3 text-uppercase">Total</div>
+                                </th>                                                                                                          
+                            </tr>                                                                                                            
+                        </thead>
+                        <tbody>
                             <tr>
                                 <th scope="row">
                                     <div class="p-2">
                                         <img src="" alt="" class="img-fluid" style="max-height: 50px;">
                                         <div class="ml-3 d-inline-block align-middle">
                                             <h5 class="mb-0">
-                                                <a>Produits</a>
+                                                <a class="text-dark"></a>
                                             </h5>
                                         </div>
                                     </div>
                                 </th>
+                                <td class="align-middle"><strong></strong></td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items center"> 
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <strong></strong>
+                                </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
