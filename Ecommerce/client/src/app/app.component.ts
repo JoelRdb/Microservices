@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './core/navbar/navbar.component';
 import { HomeModule } from './home/home.module';
@@ -25,13 +25,16 @@ import { BasketService } from './basket/basket.service';
 export class AppComponent implements OnInit{
   title = 'Vatsy';
 
-  constructor(private basketService: BasketService) {
+  constructor(private basketService: BasketService,
+    @Inject(PLATFORM_ID) private platformId: Object) {
   }
 
   ngOnInit(): void {
-    const basket_username = localStorage.getItem('basket_username');
-    if(basket_username){
-      this.basketService.getBasket(basket_username);
-    }
+    if(isPlatformBrowser(this.platformId)){ // Vérifie qu'on est bien dans le navigateur
+      const basket_username = localStorage.getItem('basket_username');
+          if(basket_username){
+            this.basketService.getBasket(basket_username);
+          }
+    }    
   }
 }

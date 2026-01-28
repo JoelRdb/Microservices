@@ -14,7 +14,7 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
   
   // Initialisation du manager à null
-  private manager: UserManager | null = null;
+  private manager: UserManager | undefined;
   private user!: User | null;
   token = "";
   access_token = "";
@@ -35,13 +35,15 @@ export class AccountService {
   
 
   // 2. Mettre à jour les autres méthodes pour vérifier le manager
-  private getUserManager(): UserManager {
-    if (!this.manager) {
-        // En SSR, une erreur est lancée si une méthode du manager est appelée
-        throw new Error('UserManager is not initialized on the server.');
+  // Vérifie qu'on est côté navigateur avant de renvoyer UserManager
+  private getUserManager(): UserManager | undefined {
+    if (!isPlatformBrowser(this.platformId)) {
+      console.warn('UserManager non disponible côté serveur');
+      return undefined;
     }
     return this.manager;
   }
+
 
   isAuthenticated(): boolean {
     const userManager = this.getUserManager();
@@ -50,11 +52,17 @@ export class AccountService {
 
   login() {
     const userManager = this.getUserManager();
+    if(!userManager){
+      throw new Error('Useranager is not initialized.')
+    }
     return userManager.signinRedirect();
   }
   
   async signout() {
     const userManager = this.getUserManager();
+    if(!userManager){
+      throw new Error('Useranager is not initialized.')
+    }
     await userManager.signoutRedirect();
   }
 
@@ -65,22 +73,27 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    this.currentUserSource.next(null);
-    this.router.navigateByUrl('/');
+    if(isPlatformBrowser(this.platformId)){
+      localStorage.removeItem('token');
+      this.currentUserSource.next(null);
+      this.router.navigateByUrl('/');
+    }    
   }
 
-  public finishLogin = (): Promise<User> => {
+// finishLogin côté navigateur uniquement
+  public finishLogin(): Promise<User | null> {
     const userManager = this.getUserManager();
+    if (!userManager) return Promise.resolve(null);
+
     return userManager.signinRedirectCallback().then(user => {
-      this.currentUserSource.next(this.checkUser(user));
-      this.token = user.token_type;
-      this.access_token = user.access_token;
-      this.currentUserSource.next(user);
+      if (user) {
+        this.currentUserSource.next(user);
+      }
       return user;
-    })
+    });
   }
 
+// Véfiei que l'utilisateur existe et son token n'est pas expiré
   checkUser(user: User): boolean {
     console.log('inside check user');
     console.log(user);
@@ -91,6 +104,9 @@ export class AccountService {
   public finishLogout = () => {
     this.user = null;
     const userManager = this.getUserManager();
+    if(!userManager){
+      throw new Error('Useranager is not initialized.')
+    }
     return userManager.signoutRedirectCallback();
   }
 }

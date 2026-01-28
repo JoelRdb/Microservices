@@ -21,6 +21,7 @@ export const routes: Routes = [
     {path: 'store', loadChildren: () => import('./store/store.module').then(mod=>mod.StoreModule), data:{breadcrumb:'Store'}},
     {path: 'basket', loadChildren: () => import('./basket/basket.module').then(mod=>mod.BasketModule), data:{breadcrumb:'Basket'}},
     {path: 'account', loadChildren: () => import('./account/account.module').then(mod=> mod.AccountModule), data:{breadcrumb: {skip:true}}},
+    {path: 'payment-information', loadChildren: () => import('./payment-information/payment-information.module').then(mod => mod.PaymentInformationModule)},
     {path: 'myorder', loadChildren: () => import('./myorder/myorder.module').then(mod => mod.MyOrderModule)},
     {path: 'checkout', canActivate:[AuthGuard], loadComponent:()=>import('./checkout/checkout.component').then(mod => mod.CheckoutComponent), data:{breadcrumb:'Checkout'}},
     {path: '**', redirectTo: '', pathMatch: 'full'}

@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Basket, IBasket, IBasketItem, IBasketTotal } from '../shared/models/basket';
 import { BehaviorSubject } from 'rxjs';
 import { IProduct } from '../shared/models/product';
 import { AccountService } from '../account/account.service';
 import { Router } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,9 @@ export class BasketService {
   // baseUrl = 'https://localhost:8010/';
   baseUrl = 'https://id-local.eshopping.com:44344/';
 
-  constructor(private http: HttpClient, private acntService: AccountService, private router: Router) { }
+  constructor(private http: HttpClient, private acntService: 
+      AccountService, private router: Router,
+      @Inject(PLATFORM_ID) private platformId: Object) { }
 
   private basketSource = new BehaviorSubject<Basket | null>(null); //stockage interne de la dernière valeur du panier(IBasket), garde en mémoire la dernière valeur émise.
   basketSource$ = this.basketSource.asObservable(); // Version observable de basketSource, que le composants peuvent écouter pour etre notifiés quand le panier change :  Utiliser dans navbar.component pour l'affichage du nombre d'éléments d'un panier
@@ -79,7 +82,8 @@ export class BasketService {
   }
   createBasket(): Basket {
     const basket = new Basket();
-    localStorage.setItem('basket_username', 'joel'); //TODO: joel can be replaced with LoggedIn User, we can see this in Inspection>Aoolicatin>Local storage
+    if(isPlatformBrowser(this.platformId))
+      localStorage.setItem('basket_username', 'joel'); //TODO: joel can be replaced with LoggedIn User, we can see this in Inspection>Application>Local storage
     return basket;
   } 
   addOrUpdateItem(items: IBasketItem[], itemToAdd: IBasketItem, quantity: number): IBasketItem[] {
@@ -138,7 +142,8 @@ export class BasketService {
       next: (response) => {
         this.basketSource.next(null);
         this.basketTotal.next(null);
-        localStorage.removeItem('basket_username');
+        if(isPlatformBrowser(this.platformId))
+          localStorage.removeItem('basket_username');
       }, error: (err) => {
         console.log('Error Occured while deletin basket');
         console.log(err);

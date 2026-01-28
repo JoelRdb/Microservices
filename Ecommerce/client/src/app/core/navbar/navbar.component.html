@@ -17,7 +17,6 @@
         <div *ngIf="(basketService.basketSource$ | async) as basket" class="cart-no">{{ getBasketCount(basket.items) }}</div>
       </a>
       <a *ngIf="!isUserAuthenticated" (click)="login()" class="btn btn-link" style="color: gray;">Login</a>
-      <a *ngIf="isUserAuthenticated" (click)="logout()" class="btn btn-link" style="color: gray;">Logout</a>
       <!-- <a *ngIf="isUserAuthenticated" class="btn btn-link" style="color: rgb(194, 3, 3);">{{ userName }}</a>       -->
 
        <div class="dropdown">
@@ -25,6 +24,7 @@
           {{ userName }}
         </button>
         <ul class="dropdown-menu">
+          <li class="dropdown-item" routerLink="/payment-information" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">My Account</li>
           <li><a *ngIf="isUserAuthenticated" (click)="logout()" class="dropdown-item" href="#">Logout</a></li>
           <li *ngIf="isAdmin">
             <a class="dropdown-item" routerLink="/myorder" routerLinkActive="active" [routerLinkActiveOptions]="{exact : true}">My order</a>
